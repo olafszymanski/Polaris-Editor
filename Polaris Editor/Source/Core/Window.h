@@ -2,7 +2,10 @@
 
 #include "Graphics.h"
 
-class Window : protected Graphics
+#include "Input/Keyboard.h"
+#include "Input/Mouse.h"
+
+class Window : protected Graphics, Keyboard, Mouse
 {
 public:
 	Window(unsigned int width, unsigned int height, const std::string& title, bool resizable);

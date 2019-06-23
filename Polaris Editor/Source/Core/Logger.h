@@ -11,9 +11,8 @@ private:
 };
 
 #ifdef _DEBUG
-	#define POLARIS_ASSERT(x, message) \
-		if (typeid(x).name() == "long" && FAILED(x)) Logger::Error(message, __FILENAME__, __LINE__); \
-		else if (!x) Logger::Error(message, __FILENAME__, __LINE__);
+	#define POLARIS_WIN_API_ASSERT(x, message) if (!x) Logger::Error(message, __FILENAME__, __LINE__);
+	#define POLARIS_DX_ASSERT(x, message) if (FAILED(x)) Logger::Error(message, __FILENAME__, __LINE__);
 #else
 	#define POLARIS_ASSERT(x, message) x;
 #endif

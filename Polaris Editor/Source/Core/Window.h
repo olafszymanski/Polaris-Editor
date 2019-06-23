@@ -1,6 +1,8 @@
 #pragma once
 
-class Window
+#include "Graphics.h"
+
+class Window : protected Graphics
 {
 public:
 	Window(unsigned int width, unsigned int height, const std::string& title, bool resizable);
@@ -18,6 +20,8 @@ public:
 	unsigned int GetHeight() const { return m_Height; }
 	std::string GetTitle() const { return m_Title; }
 	bool IsResizable() const { return m_Width; }
+
+	HWND GetHandle() const { return m_Handle; }
 
 	bool IsOpen() const { return m_Open; }
 

@@ -1,5 +1,6 @@
 struct PixelInput
 {
+	float4 Position : SV_POSITION;
 };
 
 float4 main(PixelInput pixelInput) : SV_TARGET

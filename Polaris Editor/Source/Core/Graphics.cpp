@@ -18,6 +18,8 @@ Microsoft::WRL::ComPtr<IDXGISwapChain> Graphics::s_SwapChain = nullptr;
 Microsoft::WRL::ComPtr<ID3D11RenderTargetView> Graphics::s_RenderTargetView = nullptr;
 Microsoft::WRL::ComPtr<ID3D11DepthStencilView> Graphics::s_DepthStencilView = nullptr;
 
+Microsoft::WRL::ComPtr<ID3D11RasterizerState> Graphics::s_RasterizerState = nullptr;
+
 void Graphics::Initialize(Window& window)
 {
 	CreateDevice();
@@ -28,14 +30,16 @@ void Graphics::Initialize(Window& window)
 	CreateDepthStencilView(window);
 
 	CreateViewport(window);
+
+	CreateRasterizerState();
 }
 
 void Graphics::CreateDevice()
 {
 	int flags = 0;
-	#ifdef _DEBUG
-		flags = D3D11_CREATE_DEVICE_DEBUG;
-	#endif
+#ifdef _DEBUG
+	flags = D3D11_CREATE_DEVICE_DEBUG;
+#endif
 
 	const D3D_FEATURE_LEVEL FEATURE_LEVEL = D3D_FEATURE_LEVEL_11_0;
 
@@ -138,4 +142,25 @@ void Graphics::CreateViewport(Window& window)
 	viewport.MaxDepth = 1.0f;
 
 	s_DeviceContext->RSSetViewports(1, &viewport);
+}
+
+void Graphics::CreateRasterizerState()
+{
+	D3D11_RASTERIZER_DESC rasterizerDesc = { };
+	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
+	rasterizerDesc.CullMode = D3D11_CULL_BACK;
+	rasterizerDesc.FrontCounterClockwise = false;
+	rasterizerDesc.DepthBias = 0;
+	rasterizerDesc.DepthBiasClamp = 0.0f;
+	rasterizerDesc.SlopeScaledDepthBias = 0.0f;
+	rasterizerDesc.DepthClipEnable = true;
+	rasterizerDesc.ScissorEnable = false;
+	rasterizerDesc.MultisampleEnable = s_Multisampling;
+	rasterizerDesc.AntialiasedLineEnable = false;
+
+	POLARIS_DX_ASSERT(s_Device->CreateRasterizerState(&rasterizerDesc, s_RasterizerState.GetAddressOf()), "Failed to create ID3D11RasterizerState!");
+
+	s_DeviceContext->RSSetState(s_RasterizerState.Get());
+
+	s_DeviceContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }

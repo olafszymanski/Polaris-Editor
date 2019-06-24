@@ -7,12 +7,12 @@ class Graphics
 public:
 	inline static Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() { return s_Device; }
 	inline static Microsoft::WRL::ComPtr<ID3D11DeviceContext>& GetDeviceContext() { return s_DeviceContext; }
-	
+
 	inline static Microsoft::WRL::ComPtr<IDXGISwapChain>& GetSwapChain() { return s_SwapChain; }
-	
+
 	inline static Microsoft::WRL::ComPtr<ID3D11RenderTargetView>& GetRenderTargetView() { return s_RenderTargetView; }
 	inline static Microsoft::WRL::ComPtr<ID3D11DepthStencilView>& GetDepthStencilView() { return s_DepthStencilView; }
-	
+
 protected:
 	Graphics() = default;
 	~Graphics() = default;
@@ -31,6 +31,8 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D11RenderTargetView> s_RenderTargetView;
 	static Microsoft::WRL::ComPtr<ID3D11DepthStencilView> s_DepthStencilView;
 
+	static Microsoft::WRL::ComPtr<ID3D11RasterizerState> s_RasterizerState;
+
 private:
 	void CreateDevice();
 
@@ -40,4 +42,6 @@ private:
 	void CreateDepthStencilView(Window& window);
 
 	void CreateViewport(Window& window);
+
+	void CreateRasterizerState();
 };

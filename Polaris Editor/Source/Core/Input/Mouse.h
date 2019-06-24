@@ -19,15 +19,15 @@ public:
 
 	static int GetScrollWheelValue();
 
-	static bool IsVisible() { return s_Mouse->IsVisible(); }
-	static void SetVisible(bool visible) { s_Mouse->SetVisible(visible); }
+	inline static bool IsVisible() { return s_Mouse->IsVisible(); }
+	inline static void SetVisible(bool visible) { s_Mouse->SetVisible(visible); }
 
-	static bool IsRelative() { return s_Mouse->GetState().positionMode == DirectX::Mouse::MODE_RELATIVE ? true : false; }
-	static void SetRelative() { s_Mouse->SetMode(DirectX::Mouse::MODE_RELATIVE); }
-	static bool IsAbsolute() { return s_Mouse->GetState().positionMode == DirectX::Mouse::MODE_ABSOLUTE ? true : false; }
-	static void SetAbsolute() { s_Mouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE); }
+	inline static bool IsRelative() { return s_Mouse->GetState().positionMode == DirectX::Mouse::MODE_RELATIVE ? true : false; }
+	inline static void SetRelative() { s_Mouse->SetMode(DirectX::Mouse::MODE_RELATIVE); }
+	inline static bool IsAbsolute() { return s_Mouse->GetState().positionMode == DirectX::Mouse::MODE_ABSOLUTE ? true : false; }
+	inline static void SetAbsolute() { s_Mouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE); }
 
-	static DirectX::XMUINT2 GetPosition()
+	inline static DirectX::XMUINT2 GetPosition()
 	{
 		DirectX::Mouse::State state = s_Mouse->GetState();
 		return DirectX::XMUINT2(state.x, state.y);

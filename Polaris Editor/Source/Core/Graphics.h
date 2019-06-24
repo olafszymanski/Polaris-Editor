@@ -5,13 +5,13 @@ class Window;
 class Graphics
 {
 public:
-	static Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() { return s_Device; }
-	static Microsoft::WRL::ComPtr<ID3D11DeviceContext>& GetDeviceContext() { return s_DeviceContext; }
+	inline static Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() { return s_Device; }
+	inline static Microsoft::WRL::ComPtr<ID3D11DeviceContext>& GetDeviceContext() { return s_DeviceContext; }
 	
-	static Microsoft::WRL::ComPtr<IDXGISwapChain>& GetSwapChain() { return s_SwapChain; }
+	inline static Microsoft::WRL::ComPtr<IDXGISwapChain>& GetSwapChain() { return s_SwapChain; }
 	
-	static Microsoft::WRL::ComPtr<ID3D11RenderTargetView>& GetRenderTargetView() { return s_RenderTargetView; }
-	static Microsoft::WRL::ComPtr<ID3D11DepthStencilView>& GetDepthStencilView() { return s_DepthStencilView; }
+	inline static Microsoft::WRL::ComPtr<ID3D11RenderTargetView>& GetRenderTargetView() { return s_RenderTargetView; }
+	inline static Microsoft::WRL::ComPtr<ID3D11DepthStencilView>& GetDepthStencilView() { return s_DepthStencilView; }
 	
 protected:
 	Graphics() = default;

@@ -1,32 +1,31 @@
 #pragma once
 
+#include "../Utils/NonCopyable.h"
+
 #include "Graphics.h"
 
 #include "Input/Keyboard.h"
 #include "Input/Mouse.h"
 
-class Window : protected Graphics, Keyboard, Mouse
+class Window : public NonCopyable, protected Graphics, Keyboard, Mouse
 {
 public:
 	Window(unsigned int width, unsigned int height, const std::string& title, bool resizable);
 	~Window();
-
-	Window(const Window& other);
-	void operator=(const Window& other);
 
 	void Update();
 
 	void Close();
 
 	// Getters
-	unsigned int GetWidth() const { return m_Width; }
-	unsigned int GetHeight() const { return m_Height; }
-	std::string GetTitle() const { return m_Title; }
-	bool IsResizable() const { return m_Width; }
+	inline unsigned int GetWidth() const { return m_Width; }
+	inline unsigned int GetHeight() const { return m_Height; }
+	inline std::string GetTitle() const { return m_Title; }
+	inline bool IsResizable() const { return m_Width; }
 
-	HWND GetHandle() const { return m_Handle; }
+	inline HWND GetHandle() const { return m_Handle; }
 
-	bool IsOpen() const { return m_Open; }
+	inline bool IsOpen() const { return m_Open; }
 
 private:
 	unsigned int m_Width, m_Height;

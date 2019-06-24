@@ -181,6 +181,7 @@
     <ClInclude Include="Source\Core\Renderer.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\Core\pch.h" />
+    <ClInclude Include="Source\Utils\NonCopyable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

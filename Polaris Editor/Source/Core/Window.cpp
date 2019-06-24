@@ -45,24 +45,6 @@ Window::~Window()
 	POLARIS_WIN_API_ASSERT(UnregisterClass(CLASS_NAME, m_Instance), "Failed to unregister window class!");
 }
 
-Window::Window(const Window& other)
-	: m_Width(other.m_Width), m_Height(other.m_Height)
-	, m_Title(other.m_Title)
-	, m_Resizable(other.m_Resizable)
-	, m_Instance(other.m_Instance), m_Handle(other.m_Handle)
-	, m_Message(other.m_Message)
-	, m_Open(other.m_Open) { }
-void Window::operator=(const Window& other)
-{
-	m_Width = other.m_Width;
-	m_Height = other.m_Height;
-	m_Resizable = other.m_Resizable;
-	m_Instance = other.m_Instance;
-	m_Handle = other.m_Handle;
-	m_Message = other.m_Message;
-	m_Open = other.m_Open;
-}
-
 void Window::Update()
 {
 	while (PeekMessage(&m_Message, NULL, 0, 0, PM_REMOVE))

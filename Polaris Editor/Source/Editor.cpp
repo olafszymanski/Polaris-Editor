@@ -4,13 +4,15 @@
 
 #include "Core/Renderer.h"
 
+#include "Core/Shaders/BasicShader.h"
+
 class Editor
 {
 public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
 	{
-
+		
 	}
 	~Editor()
 	{
@@ -32,6 +34,8 @@ public:
 
 private:
 	Window m_Window;
+
+	BasicShader m_BasicShader;
 
 private:
 	void Update()

@@ -39,6 +39,9 @@
     <ClCompile Include="Source\Core\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Shaders\BasicShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Window.h">
@@ -65,8 +68,17 @@
     <ClInclude Include="Source\Utils\NonCopyable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Shaders\BasicShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Shaders\Compiled\BasicPixelShader.cso" />
+    <None Include="Resources\Shaders\Compiled\BasicVertexShader.cso" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shaders\Source\BasicPixelShader.hlsl" />
+    <FxCompile Include="Resources\Shaders\Source\BasicVertexShader.hlsl" />
   </ItemGroup>
 </Project>

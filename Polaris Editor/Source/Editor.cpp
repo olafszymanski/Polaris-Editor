@@ -2,6 +2,8 @@
 
 #include "Core/Window.h"
 
+#include "Core/Renderer.h"
+
 class Editor
 {
 public:
@@ -19,8 +21,12 @@ public:
 	{
 		while (m_Window.IsOpen())
 		{
+			Renderer::ClearScreen();
+
 			Update();
 			Render();
+
+			Renderer::Present();
 		}
 	}
 

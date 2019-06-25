@@ -8,9 +8,9 @@ void Renderer::ClearScreen()
 	Graphics::GetDeviceContext()->ClearDepthStencilView(Graphics::GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 1);
 }
 
-void Renderer::Draw(unsigned int vertexCount, unsigned int startPosition)
+void Renderer::Draw(unsigned int indexCount)
 {
-	Graphics::GetDeviceContext()->Draw(vertexCount, startPosition);
+	Graphics::GetDeviceContext()->DrawIndexed(indexCount, 0, 0);
 }
 
 void Renderer::Present()

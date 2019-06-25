@@ -17,7 +17,7 @@ public:
 	VertexBuffer(const VertexBuffer& other);
 	VertexBuffer& operator=(const VertexBuffer& other);
 
-	void Bind(unsigned int slot = 0);
+	void Bind(unsigned int slot = 0) const;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_Buffer;

@@ -40,7 +40,7 @@ VertexBuffer& VertexBuffer::operator=(const VertexBuffer& other)
 	return *this;
 }
 
-void VertexBuffer::Bind(unsigned int slot)
+void VertexBuffer::Bind(unsigned int slot) const
 {
 	Graphics::GetDeviceContext()->IASetVertexBuffers(slot, 1, m_Buffer.GetAddressOf(), &m_Stride, &m_Offset);
 }

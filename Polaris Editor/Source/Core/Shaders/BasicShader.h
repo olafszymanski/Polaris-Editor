@@ -4,11 +4,6 @@
 
 #include "../Graphics.h"
 
-struct BasicVertex
-{
-	DirectX::XMFLOAT3 Position;
-};
-
 class BasicShader : public NonCopyable, protected Graphics
 {
 public:

@@ -2,13 +2,16 @@
 
 #include "../Graphics.h"
 
+#include "../Types/BasicVertex.h"
+
+struct BasicVertex;
+
 class VertexBuffer : protected Graphics
 {
 public:
-	template<typename T, unsigned int N>
-	VertexBuffer(const std::array<T, N>& vertices, unsigned int stride = sizeof(T), unsigned int offset = 0);
-	template<typename T>
-	VertexBuffer(const std::vector<T>& vertices, unsigned int stride = sizeof(T), unsigned int offset = 0);
+	template<unsigned int N>
+	VertexBuffer(const std::array<BasicVertex, N>& vertices, unsigned int stride = sizeof(BasicVertex), unsigned int offset = 0);
+	VertexBuffer(const std::vector<BasicVertex>& vertices, unsigned int stride = sizeof(BasicVertex), unsigned int offset = 0);
 	~VertexBuffer() = default;
 
 	VertexBuffer(const VertexBuffer& other);

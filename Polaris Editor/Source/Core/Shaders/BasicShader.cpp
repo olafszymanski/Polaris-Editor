@@ -4,6 +4,8 @@
 
 #include "../Logger.h"
 
+#include "../Types/BasicVertex.h"
+
 const std::array<D3D11_INPUT_ELEMENT_DESC, 1> INPUT_ELEMENTS =
 {
 	D3D11_INPUT_ELEMENT_DESC { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(BasicVertex, Position), D3D11_INPUT_PER_VERTEX_DATA, 0 },

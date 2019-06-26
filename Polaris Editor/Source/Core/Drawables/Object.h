@@ -18,18 +18,18 @@ public:
 	void Update();
 
 	// Getters
-	virtual unsigned int GetIndexCount() const override { return m_Mesh.GetIndexCount(); }
+	inline virtual unsigned int GetIndexCount() const override { return m_Mesh.GetIndexCount(); }
 
-	DirectX::XMFLOAT3 GetPosition() const { return m_Position; }
-	DirectX::XMFLOAT3 GetRotation() const { return m_Position; }
-	DirectX::XMFLOAT3 GetScale() const { return m_Position; }
+	inline DirectX::XMFLOAT3 GetPosition() const { return m_Position; }
+	inline DirectX::XMFLOAT3 GetRotation() const { return m_Position; }
+	inline DirectX::XMFLOAT3 GetScale() const { return m_Position; }
 
-	virtual DirectX::XMMATRIX GetMatrix() const override { return m_Matrix; }
+	inline virtual DirectX::XMMATRIX GetMatrix() const override { return m_Matrix; }
 
 	// Setters
-	void SetPosition(const DirectX::XMFLOAT3& position) { m_Position = position; }
-	void SetRotation(const DirectX::XMFLOAT3& rotation) { m_Rotation = rotation; }
-	void SetScale(const DirectX::XMFLOAT3& scale) { m_Scale = scale; }
+	inline void SetPosition(const DirectX::XMFLOAT3& position) { m_Position = position; }
+	inline void SetRotation(const DirectX::XMFLOAT3& rotation) { m_Rotation = rotation; }
+	inline void SetScale(const DirectX::XMFLOAT3& scale) { m_Scale = scale; }
 
 protected:
 	Mesh m_Mesh;

@@ -5,6 +5,7 @@ class Window;
 class Graphics
 {
 public:
+	// Getters
 	inline static Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() { return s_Device; }
 	inline static Microsoft::WRL::ComPtr<ID3D11DeviceContext>& GetDeviceContext() { return s_DeviceContext; }
 

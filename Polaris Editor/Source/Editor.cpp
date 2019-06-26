@@ -8,6 +8,8 @@
 
 #include "Core/Drawables/Mesh.h"
 
+#include "Core/Buffers/ConstantBuffer.h"
+
 const std::array<BasicVertex, 3> vertices =
 {
 	BasicVertex { DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f) },
@@ -26,8 +28,11 @@ public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
 		, m_Mesh(vertices, indices)
+		, colorBuffer(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
 	{
 		m_Mesh.Bind();
+	
+		colorBuffer.BindPixel();
 	}
 	~Editor()
 	{
@@ -53,6 +58,8 @@ private:
 	BasicShader m_BasicShader;
 
 	Mesh m_Mesh;
+
+	ConstantBuffer<DirectX::XMFLOAT4> colorBuffer;
 
 private:
 	void Update()

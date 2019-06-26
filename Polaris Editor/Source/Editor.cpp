@@ -28,11 +28,11 @@ public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
 		, m_Mesh(vertices, indices)
-		, colorBuffer(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+		, m_ColorBuffer(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
 	{
 		m_Mesh.Bind();
 	
-		colorBuffer.BindPixel();
+		m_ColorBuffer.BindPixel();
 	}
 	~Editor()
 	{
@@ -59,7 +59,7 @@ private:
 
 	Mesh m_Mesh;
 
-	ConstantBuffer<DirectX::XMFLOAT4> colorBuffer;
+	ConstantBuffer<DirectX::XMFLOAT4> m_ColorBuffer;
 
 private:
 	void Update()

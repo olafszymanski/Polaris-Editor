@@ -8,6 +8,8 @@
 
 #include "Core/Drawables/Object.h"
 
+#include "Core/Timer.h"
+
 const std::array<BasicVertex, 4> vertices =
 {
 	BasicVertex { DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f) },
@@ -36,9 +38,11 @@ public:
 	}
 
 	void Run()
-	{
+	{	
 		while (m_Window.IsOpen())
 		{
+			Timer::Tick();
+
 			Renderer::ClearScreen();
 
 			Update();
@@ -59,11 +63,6 @@ private:
 	void Update()
 	{
 		m_Window.Update();
-
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::A)) m_Object.SetPosition({ m_Object.GetPosition().x - 0.025f, m_Object.GetPosition().y, m_Object.GetPosition().z });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::D)) m_Object.SetPosition({ m_Object.GetPosition().x + 0.025f, m_Object.GetPosition().y, m_Object.GetPosition().z });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::W)) m_Object.SetPosition({ m_Object.GetPosition().x, m_Object.GetPosition().y + 0.025f, m_Object.GetPosition().z });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::S)) m_Object.SetPosition({ m_Object.GetPosition().x, m_Object.GetPosition().y - 0.025f, m_Object.GetPosition().z });
 
 		m_Object.Update();
 

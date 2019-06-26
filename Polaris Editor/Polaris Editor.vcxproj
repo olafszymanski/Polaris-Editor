@@ -217,6 +217,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Source\Core\Timer.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
     <ClCompile Include="Source\Editor.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Core/pch.h</PrecompiledHeaderFile>
@@ -242,6 +243,7 @@
     <ClInclude Include="Source\Core\Logger.h" />
     <ClInclude Include="Source\Core\Renderer.h" />
     <ClInclude Include="Source\Core\Shaders\BasicShader.h" />
+    <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\Types\BasicVertex.h" />
     <ClInclude Include="Source\Core\Types\WorldViewProjection.h" />
     <ClInclude Include="Source\Core\Window.h" />

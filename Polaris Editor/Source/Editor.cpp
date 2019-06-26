@@ -6,8 +6,7 @@
 
 #include "Core/Shaders/BasicShader.h"
 
-#include "Core/Buffers/VertexBuffer.h"
-#include "Core/Buffers/IndexBuffer.h"
+#include "Core/Drawables/Mesh.h"
 
 const std::array<BasicVertex, 3> vertices =
 {
@@ -26,10 +25,9 @@ class Editor
 public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
-		, m_VertexBuffer(vertices), m_IndexBuffer(indices)
+		, m_Mesh(vertices, indices)
 	{
-		m_VertexBuffer.Bind();
-		m_IndexBuffer.Bind();
+		m_Mesh.Bind();
 	}
 	~Editor()
 	{
@@ -54,8 +52,7 @@ private:
 
 	BasicShader m_BasicShader;
 
-	VertexBuffer m_VertexBuffer;
-	IndexBuffer m_IndexBuffer;
+	Mesh m_Mesh;
 
 private:
 	void Update()
@@ -64,7 +61,7 @@ private:
 	}
 	void Render()
 	{
-		Renderer::Draw(vertices.size());
+		Renderer::Draw(m_Mesh);
 	}
 };
 

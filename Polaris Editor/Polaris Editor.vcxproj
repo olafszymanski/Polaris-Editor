@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -163,6 +163,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Source\Core\Drawables\Mesh.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Source\Core\Graphics.cpp" />
     <ClCompile Include="Source\Core\Input\Keyboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../pch.h</PrecompiledHeaderFile>
@@ -212,6 +218,9 @@
     <ClInclude Include="Source\Core\Buffers\IndexBuffer.ipp" />
     <ClInclude Include="Source\Core\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Core\Buffers\VertexBuffer.ipp" />
+    <ClInclude Include="Source\Core\Drawables\Drawable.h" />
+    <ClInclude Include="Source\Core\Drawables\Mesh.h" />
+    <ClInclude Include="Source\Core\Drawables\Mesh.ipp" />
     <ClInclude Include="Source\Core\Graphics.h" />
     <ClInclude Include="Source\Core\Input\Keyboard.h" />
     <ClInclude Include="Source\Core\Input\Mouse.h" />

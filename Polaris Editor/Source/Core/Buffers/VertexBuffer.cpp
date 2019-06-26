@@ -21,11 +21,9 @@ VertexBuffer::VertexBuffer(const std::vector<BasicVertex>& vertices, unsigned in
 }
 
 VertexBuffer::VertexBuffer(const VertexBuffer& other)
+	: m_Buffer(other.m_Buffer)
+	, m_Stride(other.m_Stride), m_Offset(other.m_Offset)
 {
-	m_Buffer = other.m_Buffer;
-
-	m_Stride = other.m_Stride;
-	m_Offset = other.m_Offset;
 }
 VertexBuffer& VertexBuffer::operator=(const VertexBuffer& other)
 {

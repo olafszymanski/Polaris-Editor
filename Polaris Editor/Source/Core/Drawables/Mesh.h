@@ -22,6 +22,9 @@ public:
 	Mesh(const std::vector<BasicVertex>& vertices, const std::vector<unsigned int>& indices);
 	~Mesh() = default;
 
+	Mesh(const Mesh& other);
+	Mesh& operator=(const Mesh& other);
+
 	void Bind() const;
 
 	// Getter

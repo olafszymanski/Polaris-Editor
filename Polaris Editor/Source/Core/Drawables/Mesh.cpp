@@ -13,6 +13,24 @@ Mesh::Mesh(const std::vector<BasicVertex>& vertices, const std::vector<unsigned 
 {
 }
 
+Mesh::Mesh(const Mesh& other)
+	: m_VertexBuffer(other.m_VertexBuffer), m_IndexBuffer(other.m_IndexBuffer)
+	, m_IndexCount(other.m_IndexCount)
+{
+}
+Mesh& Mesh::operator=(const Mesh& other)
+{
+	if (this != &other)
+	{
+		m_VertexBuffer = other.m_VertexBuffer;
+		m_IndexBuffer = other.m_IndexBuffer;
+
+		m_IndexCount = other.m_IndexCount;
+	}
+
+	return *this;
+}
+
 void Mesh::Bind() const
 {
 	m_VertexBuffer.Bind();

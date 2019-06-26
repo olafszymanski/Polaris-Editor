@@ -42,14 +42,17 @@ IndexBuffer::IndexBuffer(const std::vector<unsigned int>& indices)
 }
 
 IndexBuffer::IndexBuffer(const IndexBuffer& other)
+	: m_Buffer(other.m_Buffer)
+	, m_Format(other.m_Format)
 {
-	m_Buffer = other.m_Buffer;
 }
 IndexBuffer& IndexBuffer::operator=(const IndexBuffer& other)
 {
 	if (this != &other)
 	{
 		m_Buffer = other.m_Buffer;
+
+		m_Format = other.m_Format;
 	}
 
 	return *this;

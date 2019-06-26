@@ -11,6 +11,9 @@ public:
 	ConstantBuffer(const T& data);
 	~ConstantBuffer() = default;
 
+	ConstantBuffer(const ConstantBuffer& other);
+	ConstantBuffer& operator=(const ConstantBuffer& other);
+
 	void BindVertex(unsigned int slot = 0) const;
 	void BindHull(unsigned int slot = 0) const;
 	void BindDomain(unsigned int slot = 0) const;

@@ -19,6 +19,19 @@ ConstantBuffer<T>::ConstantBuffer(const T& data)
 }
 
 template<typename T>
+ConstantBuffer<T>::ConstantBuffer(const ConstantBuffer<T>& other)
+	: m_Buffer(other.m_Buffer)
+{
+}
+template<typename T>
+ConstantBuffer<T>& ConstantBuffer<T>::operator=(const ConstantBuffer<T>& other)
+{
+	if (this != &other) m_Buffer = other.m_Buffer;
+
+	return *this;
+}
+
+template<typename T>
 void ConstantBuffer<T>::BindVertex(unsigned int slot) const
 {
 	Graphics::GetDeviceContext()->VSSetConstantBuffers(slot, 1, m_Buffer.GetAddressOf());

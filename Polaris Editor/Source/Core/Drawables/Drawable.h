@@ -6,6 +6,8 @@ public:
 	Drawable() = default;
 	~Drawable() = default;
 
-	// Getter
+	// Getters
 	virtual unsigned int GetIndexCount() const = 0;
+
+	virtual DirectX::XMMATRIX GetMatrix() const = 0;
 };

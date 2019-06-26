@@ -14,6 +14,7 @@ const std::array<D3D11_INPUT_ELEMENT_DESC, 1> INPUT_ELEMENTS =
 BasicShader::BasicShader()
 	: m_VertexShader(nullptr), m_PixelShader(nullptr)
 	, m_InputLayout(nullptr)
+	, m_WorldViewProjection(), m_WorldViewProjectionBuffer(m_WorldViewProjection)
 {
 	Microsoft::WRL::ComPtr<ID3D10Blob> shaderBlob = nullptr;
 
@@ -29,4 +30,12 @@ BasicShader::BasicShader()
 
 	Graphics::GetDeviceContext()->VSSetShader(m_VertexShader.Get(), nullptr, 0);
 	Graphics::GetDeviceContext()->PSSetShader(m_PixelShader.Get(), nullptr, 0);
+
+	m_WorldViewProjectionBuffer.BindVertex();
+}
+
+void BasicShader::UpdateWorldViewProjection(const WorldViewProjection& worldViewProjection)
+{
+	m_WorldViewProjection = worldViewProjection;
+	m_WorldViewProjectionBuffer.Update(m_WorldViewProjection);
 }

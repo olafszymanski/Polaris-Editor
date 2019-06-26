@@ -6,15 +6,14 @@
 
 #include "Core/Shaders/BasicShader.h"
 
-#include "Core/Drawables/Mesh.h"
+#include "Core/Drawables/Object.h"
 
-#include "Core/Buffers/ConstantBuffer.h"
-
-const std::array<BasicVertex, 3> vertices =
+const std::array<BasicVertex, 4> vertices =
 {
 	BasicVertex { DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f) },
 	BasicVertex { DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f) },
-	BasicVertex { DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f) }
+	BasicVertex { DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f) },
+	BasicVertex { DirectX::XMFLOAT3( 0.5f,  0.5f, 0.0f) }
 };
 const std::array<unsigned short, 6> indices =
 {
@@ -27,12 +26,9 @@ class Editor
 public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
-		, m_Mesh(vertices, indices)
-		, m_ColorBuffer(DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+		, m_Object({ vertices, indices }, { 0.0f, 0.0f, 0.0f })
 	{
-		m_Mesh.Bind();
-	
-		m_ColorBuffer.BindPixel();
+		m_Object.Bind();
 	}
 	~Editor()
 	{
@@ -57,18 +53,25 @@ private:
 
 	BasicShader m_BasicShader;
 
-	Mesh m_Mesh;
-
-	ConstantBuffer<DirectX::XMFLOAT4> m_ColorBuffer;
+	Object m_Object;
 
 private:
 	void Update()
 	{
 		m_Window.Update();
+
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::A)) m_Object.SetPosition({ m_Object.GetPosition().x - 0.025f, m_Object.GetPosition().y, m_Object.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::D)) m_Object.SetPosition({ m_Object.GetPosition().x + 0.025f, m_Object.GetPosition().y, m_Object.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::W)) m_Object.SetPosition({ m_Object.GetPosition().x, m_Object.GetPosition().y + 0.025f, m_Object.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::Keys::S)) m_Object.SetPosition({ m_Object.GetPosition().x, m_Object.GetPosition().y - 0.025f, m_Object.GetPosition().z });
+
+		m_Object.Update();
+
+		m_BasicShader.UpdateWorldViewProjection({ m_Object.GetMatrix() });
 	}
 	void Render()
 	{
-		Renderer::Draw(m_Mesh);
+		Renderer::Draw(m_Object);
 	}
 };
 

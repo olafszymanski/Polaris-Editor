@@ -1,8 +1,3 @@
-cbuffer ColorBuffer : register(b0)
-{
-	float4 Color;
-}
-
 struct PixelInput
 {
 	float4 Position : SV_POSITION;
@@ -10,5 +5,5 @@ struct PixelInput
 
 float4 main(PixelInput pixelInput) : SV_TARGET
 {
-	return Color;
+	return float4(1.0f, 1.0f, 1.0f, 1.0f);
 }

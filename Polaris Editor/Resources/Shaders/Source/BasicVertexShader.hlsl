@@ -1,3 +1,8 @@
+cbuffer Matrix : register(b0)
+{
+	matrix WVP;
+};
+
 struct VertexInput
 {
 	float3 Position : POSITION;
@@ -11,7 +16,7 @@ struct PixelInput
 PixelInput main(VertexInput vertexInput)
 {
 	PixelInput pixelInput;
-	pixelInput.Position = float4(vertexInput.Position, 1.0f);
+	pixelInput.Position = mul(float4(vertexInput.Position, 1.0f), WVP);
 
 	return pixelInput;
 }

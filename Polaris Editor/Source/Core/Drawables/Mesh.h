@@ -7,7 +7,7 @@ struct BasicVertex;
 #include "../Buffers/VertexBuffer.h"
 #include "../Buffers/IndexBuffer.h"
 
-class Mesh : public Drawable
+class Mesh
 {
 public:
 	template<unsigned int V_N, unsigned int I_N>
@@ -28,7 +28,7 @@ public:
 	void Bind() const;
 
 	// Getter
-	virtual unsigned int GetIndexCount() const override { return m_IndexCount; }
+	unsigned int GetIndexCount() const { return m_IndexCount; }
 
 private:
 	VertexBuffer m_VertexBuffer;

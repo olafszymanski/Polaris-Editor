@@ -1,4 +1,4 @@
-#include "Core/pch.h"
+#include <pch.h>
 
 #include "Core/Window.h"
 
@@ -10,14 +10,14 @@
 
 #include "Core/Timer.h"
 
-const std::array<BasicVertex, 4> vertices =
+const std::array<BasicVertex, 4> vertices
 {
 	BasicVertex { DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f) },
 	BasicVertex { DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f) },
 	BasicVertex { DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f) },
 	BasicVertex { DirectX::XMFLOAT3( 0.5f,  0.5f, 0.0f) }
 };
-const std::array<unsigned short, 6> indices =
+const std::array<unsigned short, 6> indices
 {
 	0, 1, 2,
 	2, 3, 0

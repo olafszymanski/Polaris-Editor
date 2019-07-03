@@ -2,7 +2,7 @@
 template<typename T>
 ConstantBuffer<T>::ConstantBuffer(const T& data)
 {
-	D3D11_BUFFER_DESC bufferDesc = { };
+	D3D11_BUFFER_DESC bufferDesc { };
 	bufferDesc.ByteWidth = sizeof(data) < 16 ? 16 : sizeof(data);
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -10,7 +10,7 @@ ConstantBuffer<T>::ConstantBuffer(const T& data)
 	bufferDesc.MiscFlags = 0;
 	bufferDesc.StructureByteStride = 0;
 
-	D3D11_SUBRESOURCE_DATA subresourceData = { };
+	D3D11_SUBRESOURCE_DATA subresourceData { };
 	subresourceData.pSysMem = &data;
 	subresourceData.SysMemPitch = 0;
 	subresourceData.SysMemSlicePitch = 0;

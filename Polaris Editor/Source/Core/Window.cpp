@@ -14,7 +14,7 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 	, m_Message({ })
 	, m_Open(false) 
 {
-	WNDCLASSEX windowClass = { };
+	WNDCLASSEX windowClass { };
 	windowClass.cbSize = sizeof(WNDCLASSEX);
 	windowClass.style = CS_OWNDC | CS_VREDRAW | CS_HREDRAW;
 	windowClass.lpfnWndProc = WindowProc;

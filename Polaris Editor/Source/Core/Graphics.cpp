@@ -64,7 +64,7 @@ void Graphics::CreateSwapChain(Window& window)
 	Microsoft::WRL::ComPtr<IDXGIFactory> dxgiFactory = nullptr;
 	POLARIS_DX_ASSERT(dxgiAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(dxgiFactory.GetAddressOf())), "Failed to create IDXGIFactory!");
 
-	DXGI_SWAP_CHAIN_DESC swapChainDesc = { };
+	DXGI_SWAP_CHAIN_DESC swapChainDesc { };
 	swapChainDesc.BufferDesc.Width = window.GetWidth();
 	swapChainDesc.BufferDesc.Height = window.GetHeight();
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
@@ -103,7 +103,7 @@ void Graphics::CreateDepthStencilView(Window& window)
 {
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer = nullptr;
 
-	D3D11_TEXTURE2D_DESC depthStencilBufferDesc = { };
+	D3D11_TEXTURE2D_DESC depthStencilBufferDesc { };
 	depthStencilBufferDesc.Width = window.GetWidth();
 	depthStencilBufferDesc.Height = window.GetHeight();
 	depthStencilBufferDesc.MipLevels = 1;
@@ -133,7 +133,7 @@ void Graphics::CreateDepthStencilView(Window& window)
 
 void Graphics::CreateViewport(Window& window)
 {
-	D3D11_VIEWPORT viewport = { };
+	D3D11_VIEWPORT viewport { };
 	viewport.TopLeftX = 0.0f;
 	viewport.TopLeftY = 0.0f;
 	viewport.Width = static_cast<float>(window.GetWidth());
@@ -146,7 +146,7 @@ void Graphics::CreateViewport(Window& window)
 
 void Graphics::CreateRasterizerState()
 {
-	D3D11_RASTERIZER_DESC rasterizerDesc = { };
+	D3D11_RASTERIZER_DESC rasterizerDesc { };
 	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_BACK;
 	rasterizerDesc.FrontCounterClockwise = false;

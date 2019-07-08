@@ -20,7 +20,7 @@ Microsoft::WRL::ComPtr<ID3D11DepthStencilView> Graphics::s_DepthStencilView = nu
 
 Microsoft::WRL::ComPtr<ID3D11RasterizerState> Graphics::s_RasterizerState = nullptr;
 
-void Graphics::Initialize(Window& window)
+void Graphics::Initialize(const Window& window)
 {
 	CreateDevice();
 
@@ -53,7 +53,7 @@ void Graphics::CreateDevice()
 	}
 }
 
-void Graphics::CreateSwapChain(Window& window)
+void Graphics::CreateSwapChain(const Window& window)
 {
 	Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice = nullptr;
 	POLARIS_DX_ASSERT(s_Device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(dxgiDevice.GetAddressOf())), "Failed to create IDXGIDevice!");
@@ -99,7 +99,7 @@ void Graphics::CreateRenderTargetView()
 
 	POLARIS_DX_ASSERT(s_Device->CreateRenderTargetView(backBuffer.Get(), nullptr, s_RenderTargetView.GetAddressOf()), "Failed to create IDXGIRenderTargetView!");
 }
-void Graphics::CreateDepthStencilView(Window& window)
+void Graphics::CreateDepthStencilView(const Window& window)
 {
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer = nullptr;
 
@@ -131,7 +131,7 @@ void Graphics::CreateDepthStencilView(Window& window)
 	s_DeviceContext->OMSetRenderTargets(1, s_RenderTargetView.GetAddressOf(), s_DepthStencilView.Get());
 }
 
-void Graphics::CreateViewport(Window& window)
+void Graphics::CreateViewport(const Window& window)
 {
 	D3D11_VIEWPORT viewport { };
 	viewport.TopLeftX = 0.0f;

@@ -9,7 +9,7 @@ class Renderer
 public:
 	static void ClearScreen();
 
-	static void Draw(Drawable& drawable);
+	static void Draw(const Drawable& drawable);
 
 	static void Present();
 

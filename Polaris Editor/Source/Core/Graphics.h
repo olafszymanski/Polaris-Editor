@@ -18,7 +18,7 @@ protected:
 	Graphics() = default;
 	~Graphics() = default;
 
-	void Initialize(Window& window);
+	void Initialize(const Window& window);
 
 private:
 	static bool s_Multisampling;
@@ -37,12 +37,12 @@ private:
 private:
 	void CreateDevice();
 
-	void CreateSwapChain(Window& window);
+	void CreateSwapChain(const Window& window);
 
 	void CreateRenderTargetView();
-	void CreateDepthStencilView(Window& window);
+	void CreateDepthStencilView(const Window& window);
 
-	void CreateViewport(Window& window);
+	void CreateViewport(const Window& window);
 
 	void CreateRasterizerState();
 };

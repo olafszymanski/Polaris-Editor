@@ -37,7 +37,7 @@ protected:
 	Mouse() = default;
 	~Mouse() = default;
 
-	void SetWindow(Window& window);
+	void SetWindow(const Window& window);
 
 	void HandleInput(UINT message, WPARAM wParam, LPARAM lParam);
 

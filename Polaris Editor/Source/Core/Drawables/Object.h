@@ -7,7 +7,7 @@
 class Object : public Drawable
 {
 public:
-	Object(Mesh mesh, const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& rotation = { 0.0f, 0.0f, 0.0f }, const DirectX::XMFLOAT3& scale = { 1.0f, 1.0f, 1.0f });
+	Object(const Mesh& mesh, const DirectX::XMFLOAT3& position = { 0.0f, 0.0f, 0.0f }, const DirectX::XMFLOAT3& rotation = { 0.0f, 0.0f, 0.0f }, const DirectX::XMFLOAT3& scale = { 1.0f, 1.0f, 1.0f });
 	~Object() = default;
 
 	Object(const Object& other);

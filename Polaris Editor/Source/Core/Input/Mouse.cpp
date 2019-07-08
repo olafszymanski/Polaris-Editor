@@ -134,7 +134,7 @@ int Mouse::GetScrollWheelValue()
 	return s_Mouse->GetState().scrollWheelValue;
 }
 
-void Mouse::SetWindow(Window& window)
+void Mouse::SetWindow(const Window& window)
 {
 	s_Mouse->SetWindow(window.GetHandle());
 }

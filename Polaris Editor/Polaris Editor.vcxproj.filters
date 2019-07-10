@@ -60,6 +60,15 @@
     <ClCompile Include="Source\Core\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Textures\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Shaders\TextureShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Drawables\TexturedObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Window.h">
@@ -128,14 +137,35 @@
     <ClInclude Include="Source\Core\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Textures\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Shaders\TextureShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Drawables\TexturedObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\Shaders\Compiled\BasicPixelShader.cso" />
     <None Include="Resources\Shaders\Compiled\BasicVertexShader.cso" />
+    <None Include="Resources\Shaders\Compiled\TexturePixelShader.cso" />
+    <None Include="Resources\Shaders\Compiled\TextureVertexShader.cso" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Source\BasicPixelShader.hlsl" />
     <FxCompile Include="Resources\Shaders\Source\BasicVertexShader.hlsl" />
+    <FxCompile Include="Resources\Shaders\Source\TexturePixelShader.hlsl" />
+    <FxCompile Include="Resources\Shaders\Source\TextureVertexShader.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\Crate.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Textures\BrickWall.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

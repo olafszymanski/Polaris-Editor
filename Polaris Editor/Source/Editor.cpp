@@ -4,18 +4,18 @@
 
 #include "Core/Renderer.h"
 
-#include "Core/Shaders/BasicShader.h"
+#include "Core/Shaders/TextureShader.h"
 
-#include "Core/Drawables/Object.h"
+#include "Core/Drawables/TexturedObject.h"
 
 #include "Core/Timer.h"
 
 const std::array<BasicVertex, 4> vertices
 {
-	BasicVertex { DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f) },
-	BasicVertex { DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f) },
-	BasicVertex { DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f) },
-	BasicVertex { DirectX::XMFLOAT3( 0.5f,  0.5f, 0.0f) }
+	BasicVertex { DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f), DirectX::XMFLOAT2(1.0f, 0.0f) },
+	BasicVertex { DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f), DirectX::XMFLOAT2(0.0f, 0.0f) },
+	BasicVertex { DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f), DirectX::XMFLOAT2(0.0f, 1.0f) },
+	BasicVertex { DirectX::XMFLOAT3( 0.5f,  0.5f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f) }
 };
 const std::array<unsigned short, 6> indices
 {
@@ -28,9 +28,9 @@ class Editor
 public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
-		, m_Object({ vertices, indices }, { 0.0f, 0.0f, 0.0f })
+		, m_TexturedObject({ vertices, indices }, { "Resources/Textures/Crate.jpg" })
 	{
-		m_Object.Bind();
+		m_TexturedObject.Bind();
 	}
 	~Editor()
 	{
@@ -55,22 +55,22 @@ public:
 private:
 	Window m_Window;
 
-	BasicShader m_BasicShader;
+	TextureShader m_TextureShader;
 
-	Object m_Object;
+	TexturedObject m_TexturedObject;
 
 private:
 	void Update()
 	{
 		m_Window.Update();
 
-		m_Object.Update();
+		m_TexturedObject.Update();
 
-		m_BasicShader.UpdateWorldViewProjection({ m_Object.GetMatrix() });
+		m_TextureShader.UpdateWorldViewProjection({ m_TexturedObject.GetMatrix() });
 	}
 	void Render()
 	{
-		Renderer::Draw(m_Object);
+		Renderer::Draw(m_TexturedObject);
 	}
 };
 

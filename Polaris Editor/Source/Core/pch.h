@@ -17,6 +17,8 @@
 #include <DirectXMath.h>
 #include <DirectXColors.h>
 
+#include <WICTextureLoader.h>
+
 #include <Windows.h>
 #include <wrl.h>
 

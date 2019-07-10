@@ -2,6 +2,8 @@
 
 #include "IndexBuffer.h"
 
+#include "../Graphics.h"
+
 IndexBuffer::IndexBuffer(const std::vector<unsigned short>& indices)
 	: m_Buffer(nullptr)
 	, m_Format(DXGI_FORMAT_R16_UINT)

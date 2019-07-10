@@ -1,11 +1,9 @@
 #pragma once
 
-#include "../Graphics.h"
-
 #include "../Logger.h"
 
 template<typename T>
-class ConstantBuffer : protected Graphics
+class ConstantBuffer
 {
 public:
 	ConstantBuffer(const T& data);

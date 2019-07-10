@@ -2,6 +2,8 @@
 
 #include "Texture.h"
 
+#include "../Graphics.h"
+
 #include "../Logger.h"
 
 Texture::Texture(const std::string& filePath)

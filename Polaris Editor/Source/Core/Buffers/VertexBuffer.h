@@ -1,12 +1,10 @@
 #pragma once
 
-#include "../Graphics.h"
-
 #include "../Types/BasicVertex.h"
 
 struct BasicVertex;
 
-class VertexBuffer : protected Graphics
+class VertexBuffer
 {
 public:
 	template<unsigned int N>

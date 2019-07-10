@@ -2,6 +2,8 @@
 
 #include "VertexBuffer.h"
 
+#include "../Graphics.h"
+
 VertexBuffer::VertexBuffer(const std::vector<BasicVertex>& vertices, unsigned int stride, unsigned int offset)
 {
 	D3D11_BUFFER_DESC bufferDesc { };

@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../Graphics.h"
-
 #include "../Logger.h"
 
-class IndexBuffer : protected Graphics
+class IndexBuffer
 {
 public:
 	template<unsigned int N>

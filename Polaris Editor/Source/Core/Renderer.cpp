@@ -2,6 +2,8 @@
 
 #include "Renderer.h"
 
+#include "Graphics.h"
+
 #include "Drawables/Drawable.h"
 
 void Renderer::ClearScreen()

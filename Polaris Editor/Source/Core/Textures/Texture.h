@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../Graphics.h"
-
-class Texture : protected Graphics
+class Texture
 {
 public:
 	Texture(const std::string& filePath);

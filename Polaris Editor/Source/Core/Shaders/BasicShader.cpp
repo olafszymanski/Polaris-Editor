@@ -2,6 +2,8 @@
 
 #include "BasicShader.h"
 
+#include "../Graphics.h"
+
 #include "../Logger.h"
 
 #include "../Types/BasicVertex.h"
@@ -14,7 +16,6 @@ const std::array<D3D11_INPUT_ELEMENT_DESC, 1> INPUT_ELEMENTS =
 BasicShader::BasicShader()
 	: m_VertexShader(nullptr), m_PixelShader(nullptr)
 	, m_InputLayout(nullptr)
-	, m_WorldViewProjection(), m_WorldViewProjectionBuffer(m_WorldViewProjection)
 {
 	Microsoft::WRL::ComPtr<ID3D10Blob> shaderBlob = nullptr;
 
@@ -25,17 +26,14 @@ BasicShader::BasicShader()
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateVertexShader(shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), nullptr, m_VertexShader.GetAddressOf()), "Failed to create ID3D11VertexShader for BasicShader!");
 
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateInputLayout(INPUT_ELEMENTS.data(), INPUT_ELEMENTS.size(), shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), m_InputLayout.GetAddressOf()), "Failed to create ID3D11InputLayout for BasicShader!");
+}
 
+void BasicShader::Bind() const
+{
 	Graphics::GetDeviceContext()->IASetInputLayout(m_InputLayout.Get());
 
 	Graphics::GetDeviceContext()->VSSetShader(m_VertexShader.Get(), nullptr, 0);
 	Graphics::GetDeviceContext()->PSSetShader(m_PixelShader.Get(), nullptr, 0);
 
 	m_WorldViewProjectionBuffer.BindVertex();
-}
-
-void BasicShader::UpdateWorldViewProjection(const WorldViewProjection& worldViewProjection)
-{
-	m_WorldViewProjection = worldViewProjection;
-	m_WorldViewProjectionBuffer.Update(m_WorldViewProjection);
 }

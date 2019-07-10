@@ -1,19 +1,14 @@
 #pragma once
 
-#include "../../Utils/NonCopyable.h"
+#include "Shader.h"
 
-#include "../Graphics.h"
-
-#include "../Types/WorldViewProjection.h"
-#include "../Buffers/ConstantBuffer.h"
-
-class TextureShader : public NonCopyable, protected Graphics
+class TextureShader : public Shader
 {
 public:
 	TextureShader();
 	~TextureShader() = default;
 
-	void UpdateWorldViewProjection(const WorldViewProjection& worldViewProjection);
+	virtual void Bind() const;
 
 private:
 	const wchar_t* m_VertexShaderSource = L"Resources/Shaders/Compiled/TextureVertexShader.cso";
@@ -23,7 +18,4 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PixelShader;
 
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_InputLayout;
-
-	WorldViewProjection m_WorldViewProjection;
-	ConstantBuffer<WorldViewProjection> m_WorldViewProjectionBuffer;
 };

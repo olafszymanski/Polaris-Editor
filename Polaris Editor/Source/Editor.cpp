@@ -30,6 +30,8 @@ public:
 		: m_Window(800, 600, "Polaris Editor", false)
 		, m_TexturedObject({ vertices, indices }, { "Resources/Textures/Crate.jpg" })
 	{
+		m_TextureShader.Bind();
+
 		m_TexturedObject.Bind();
 	}
 	~Editor()

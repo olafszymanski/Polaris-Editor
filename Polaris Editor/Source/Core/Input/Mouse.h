@@ -27,10 +27,11 @@ public:
 	inline static bool IsAbsolute() { return s_Mouse->GetState().positionMode == DirectX::Mouse::MODE_ABSOLUTE ? true : false; }
 	inline static void SetAbsolute() { s_Mouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE); }
 
-	inline static DirectX::XMUINT2 GetPosition()
+	inline static std::pair<unsigned int, unsigned int> GetPosition()
 	{
 		DirectX::Mouse::State state = s_Mouse->GetState();
-		return DirectX::XMUINT2(state.x, state.y);
+
+		return std::make_pair(state.x, state.y);
 	}
 
 protected:

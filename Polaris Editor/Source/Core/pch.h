@@ -14,7 +14,7 @@
 #include <Keyboard.h>
 #include <Mouse.h>
 
-#include <DirectXMath.h>
+#include <SimpleMath.h>
 #include <DirectXColors.h>
 
 #include <WICTextureLoader.h>

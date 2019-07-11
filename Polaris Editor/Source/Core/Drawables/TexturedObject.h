@@ -7,7 +7,7 @@
 class TexturedObject : public Object
 {
 public:
-	TexturedObject(const Mesh& mesh, const Texture& texture, const DirectX::XMFLOAT3& position = { 0.0f, 0.0f, 0.0f }, const DirectX::XMFLOAT3& rotation = { 0.0f, 0.0f, 0.0f }, const DirectX::XMFLOAT3& scale = { 1.0f, 1.0f, 1.0f });
+	TexturedObject(const Mesh& mesh, const Texture& texture, const DirectX::SimpleMath::Vector3& position = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& rotation = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& scale = { 1.0f, 1.0f, 1.0f });
 	~TexturedObject() = default;
 
 	TexturedObject(const TexturedObject& other);

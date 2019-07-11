@@ -4,13 +4,13 @@
 
 struct WorldViewProjection
 {
-	DirectX::XMMATRIX Matrix;
+	DirectX::SimpleMath::Matrix Matrix;
 
 	WorldViewProjection()
-		: Matrix(DirectX::XMMatrixIdentity())
+		: Matrix(DirectX::SimpleMath::Matrix::Identity)
 	{
 	}
-	WorldViewProjection(const DirectX::XMMATRIX& matrix)
+	WorldViewProjection(const DirectX::SimpleMath::Matrix& matrix)
 		: Matrix(matrix)
 	{
 	}

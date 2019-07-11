@@ -2,10 +2,10 @@
 
 #include "Object.h"
 
-Object::Object(const Mesh& mesh, const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& rotation, const DirectX::XMFLOAT3& scale)
+Object::Object(const Mesh& mesh, const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Vector3& rotation, const DirectX::SimpleMath::Vector3& scale)
 	: m_Mesh(mesh)
 	, m_Position(position), m_Rotation(rotation), m_Scale(scale)
-	, m_Matrix(DirectX::XMMatrixTranspose(DirectX::XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z)))
+	, m_Matrix(DirectX::SimpleMath::Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::SimpleMath::Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z).Transpose())
 {
 }
 
@@ -38,5 +38,5 @@ void Object::Bind() const
 
 void Object::Update()
 {
-	m_Matrix = DirectX::XMMatrixTranspose(DirectX::XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z));
+	m_Matrix = DirectX::SimpleMath::Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::SimpleMath::Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
 }

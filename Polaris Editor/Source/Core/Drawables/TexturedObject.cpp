@@ -2,7 +2,7 @@
 
 #include "TexturedObject.h"
 
-TexturedObject::TexturedObject(const Mesh& mesh, const Texture& texture, const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3& rotation, const DirectX::XMFLOAT3& scale)
+TexturedObject::TexturedObject(const Mesh& mesh, const Texture& texture, const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Vector3& rotation, const DirectX::SimpleMath::Vector3& scale)
 	: Object(mesh, position, rotation, scale), m_Texture(texture)
 	, m_UpdateTexture(false)
 {
@@ -41,8 +41,8 @@ void TexturedObject::Bind() const
 
 void TexturedObject::Update()
 {
-	m_Matrix = DirectX::XMMatrixTranspose(DirectX::XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z));
-	
+	m_Matrix = DirectX::SimpleMath::Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::SimpleMath::Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
+
 	if (m_UpdateTexture)
 	{
 		m_Texture.Bind();

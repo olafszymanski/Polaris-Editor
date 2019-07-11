@@ -35,13 +35,14 @@ TexturedObject& TexturedObject::operator=(const TexturedObject& other)
 
 void TexturedObject::Bind() const
 {
+	Object::Bind();
+
 	m_Texture.Bind();
-	m_Mesh.Bind();
 }
 
 void TexturedObject::Update()
 {
-	m_Matrix = DirectX::SimpleMath::Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z) * DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::SimpleMath::Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
+	Object::Update();
 
 	if (m_UpdateTexture)
 	{

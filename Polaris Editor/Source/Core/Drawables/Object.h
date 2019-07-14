@@ -13,9 +13,9 @@ public:
 	Object(const Object& other);
 	Object& operator=(const Object& other);
 
-	virtual void Bind() const;
+	virtual void Bind() const override;
 
-	virtual void Update();
+	virtual void Update() override;
 
 	// Getters
 	inline virtual unsigned int GetIndexCount() const override { return m_Mesh.GetIndexCount(); }

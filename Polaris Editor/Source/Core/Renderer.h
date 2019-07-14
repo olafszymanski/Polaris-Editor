@@ -2,16 +2,35 @@
 
 class Drawable;
 
+#include "Shaders/BasicShader.h"
+#include "Shaders/TextureShader.h"
+
+#include "Drawables/Object.h"
+#include "Drawables/TexturedObject.h"
+
 class Renderer
 {
 public:
-	static void ClearScreen();
+	Renderer();
+	~Renderer() = default;
 
-	static void Draw(const Drawable& drawable);
+	void ClearScreen();
 
-	static void Present();
+	void PushDrawable(const Drawable& drawable);
+	template<unsigned int N>
+	void PushDrawables(const std::array<Drawable*, N>& drawables);
+	void PushDrawables(const std::vector<Drawable*>& drawables);
+
+	void Draw();
+
+	void Present();
 
 private:
-	Renderer() = default;
-	~Renderer() = default;
+	BasicShader m_BasicShader;
+	TextureShader m_TextureShader;
+
+	std::vector<Object*> m_Objects;
+	std::vector<TexturedObject*> m_TexturedObjects;
 };
+
+#include "Renderer.ipp"

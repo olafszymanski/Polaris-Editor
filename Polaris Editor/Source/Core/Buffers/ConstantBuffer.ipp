@@ -1,6 +1,7 @@
 #include "ConstantBuffer.h"
 template<typename T>
 ConstantBuffer<T>::ConstantBuffer(const T& data)
+	: m_Buffer(nullptr)
 {
 	D3D11_BUFFER_DESC bufferDesc { };
 	bufferDesc.ByteWidth = sizeof(data) < 16 ? 16 : sizeof(data);

@@ -28,11 +28,9 @@ class Editor
 public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
-		, m_TexturedObject({ vertices, indices }, { "Resources/Textures/Crate.jpg" })
+		, m_Object({ vertices, indices }, { 1.0f, 0.0f, 0.0f }), m_TexturedObject({ vertices, indices }, { "Resources/Textures/Crate.jpg" }, { 0.0f, 0.0f, 0.0f })
 	{
-		m_TextureShader.Bind();
-
-		m_TexturedObject.Bind();
+		m_Renderer.PushDrawables({ &m_TexturedObject, &m_Object });
 	}
 	~Editor()
 	{
@@ -45,34 +43,31 @@ public:
 		{
 			Timer::Tick();
 
-			Renderer::ClearScreen();
+			m_Renderer.ClearScreen();
 
 			Update();
 			Render();
 
-			Renderer::Present();
+			m_Renderer.Present();
 		}
 	}
 
 private:
 	Window m_Window;
 
-	TextureShader m_TextureShader;
+	Renderer m_Renderer;
 
+	Object m_Object;
 	TexturedObject m_TexturedObject;
 
 private:
 	void Update()
 	{
 		m_Window.Update();
-
-		m_TexturedObject.Update();
-
-		m_TextureShader.UpdateWorldViewProjection({ m_TexturedObject.GetMatrix() });
 	}
 	void Render()
 	{
-		Renderer::Draw(m_TexturedObject);
+		m_Renderer.Draw();
 	}
 };
 

@@ -5,6 +5,8 @@
 #include "../Graphics.h"
 
 VertexBuffer::VertexBuffer(const std::vector<BasicVertex>& vertices, unsigned int stride, unsigned int offset)
+	: m_Buffer(nullptr)
+	, m_Stride(stride), m_Offset(offset)
 {
 	D3D11_BUFFER_DESC bufferDesc { };
 	bufferDesc.ByteWidth = sizeof(BasicVertex) * vertices.size();

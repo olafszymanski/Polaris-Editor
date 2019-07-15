@@ -30,7 +30,7 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 
 	POLARIS_WIN_API_ASSERT(RegisterClassEx(&windowClass), "Failed to register WNDCLASSEX!");
 
-	POLARIS_WIN_API_ASSERT((m_Handle = CreateWindowEx(NULL, CLASS_NAME, m_Title.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, NULL, NULL, m_Instance, this)), "Failed to create window!");
+	POLARIS_WIN_API_ASSERT((m_Handle = CreateWindowEx(NULL, "Polaris Editor", "title", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, NULL, NULL, m_Instance, this)), "Failed to create window!");
 
 	ShowWindow(m_Handle, SW_SHOWDEFAULT);
 
@@ -68,12 +68,12 @@ LRESULT Window::WindowProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	{
 		Window* window = reinterpret_cast<Window*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
 
-		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG>(window));
-		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG>(Window::WindowProcAdapter));
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(window));
+		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(Window::WindowProcAdapter));
 	
 		return window->HandleEvents(hWnd, Msg, wParam, lParam);
 	}
-
+	
 	return DefWindowProc(hWnd, Msg, wParam, lParam);
 }
 LRESULT Window::WindowProcAdapter(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)

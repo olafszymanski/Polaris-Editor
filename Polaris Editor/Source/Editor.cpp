@@ -71,7 +71,7 @@ private:
 	}
 };
 
-int main()
+int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	Editor editor;
 	editor.Run();

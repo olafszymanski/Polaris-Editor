@@ -2,7 +2,7 @@
 
 #include "Renderer.h"
 
-#include "Graphics.h"
+#include "Graphics/Graphics.h"
 
 #include "Drawables/Drawable.h"
 

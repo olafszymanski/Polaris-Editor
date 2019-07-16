@@ -155,38 +155,33 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Core\Buffers\ConstantBuffer.cpp">
+    <ClCompile Include="Source\Core\Graphics\Buffers\ConstantBuffer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Buffers\IndexBuffer.cpp">
+    <ClCompile Include="Source\Core\Graphics\Buffers\IndexBuffer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Buffers\VertexBuffer.cpp">
+    <ClCompile Include="Source\Core\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Drawables\Mesh.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Drawables\Mesh.cpp">
+    <ClCompile Include="Source\Core\Graphics\Drawables\Object.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Drawables\Object.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Source\Core\Drawables\TexturedObject.cpp" />
-    <ClCompile Include="Source\Core\Graphics.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Drawables\TexturedObject.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Core\Input\Keyboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
@@ -210,23 +205,23 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Renderer.cpp">
+    <ClCompile Include="Source\Core\Graphics\Renderer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Shaders\BasicShader.cpp">
+    <ClCompile Include="Source\Core\Graphics\Shaders\BasicShader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Shaders\Shader.cpp" />
-    <ClCompile Include="Source\Core\Shaders\TextureShader.cpp" />
-    <ClCompile Include="Source\Core\Textures\Texture.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Shaders\Shader.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Shaders\TextureShader.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Textures\Texture.cpp" />
     <ClCompile Include="Source\Core\Timer.cpp" />
-    <ClCompile Include="Source\Core\Window.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Window.cpp" />
     <ClCompile Include="Source\Editor.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
@@ -235,31 +230,31 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core\Buffers\ConstantBuffer.h" />
-    <ClInclude Include="Source\Core\Buffers\ConstantBuffer.ipp" />
-    <ClInclude Include="Source\Core\Buffers\IndexBuffer.h" />
-    <ClInclude Include="Source\Core\Buffers\IndexBuffer.ipp" />
-    <ClInclude Include="Source\Core\Buffers\VertexBuffer.h" />
-    <ClInclude Include="Source\Core\Buffers\VertexBuffer.ipp" />
-    <ClInclude Include="Source\Core\Drawables\Drawable.h" />
-    <ClInclude Include="Source\Core\Drawables\Mesh.h" />
-    <ClInclude Include="Source\Core\Drawables\Mesh.ipp" />
-    <ClInclude Include="Source\Core\Drawables\Object.h" />
-    <ClInclude Include="Source\Core\Drawables\TexturedObject.h" />
-    <ClInclude Include="Source\Core\Graphics.h" />
+    <ClInclude Include="Source\Core\Graphics\Buffers\ConstantBuffer.h" />
+    <ClInclude Include="Source\Core\Graphics\Buffers\ConstantBuffer.ipp" />
+    <ClInclude Include="Source\Core\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Source\Core\Graphics\Buffers\IndexBuffer.ipp" />
+    <ClInclude Include="Source\Core\Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Source\Core\Graphics\Buffers\VertexBuffer.ipp" />
+    <ClInclude Include="Source\Core\Graphics\Drawables\Drawable.h" />
+    <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.h" />
+    <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.ipp" />
+    <ClInclude Include="Source\Core\Graphics\Drawables\Object.h" />
+    <ClInclude Include="Source\Core\Graphics\Drawables\TexturedObject.h" />
+    <ClInclude Include="Source\Core\Graphics\Graphics.h" />
     <ClInclude Include="Source\Core\Input\Keyboard.h" />
     <ClInclude Include="Source\Core\Input\Mouse.h" />
     <ClInclude Include="Source\Core\Logger.h" />
-    <ClInclude Include="Source\Core\Renderer.h" />
-    <ClInclude Include="Source\Core\Renderer.ipp" />
-    <ClInclude Include="Source\Core\Shaders\BasicShader.h" />
-    <ClInclude Include="Source\Core\Shaders\Shader.h" />
-    <ClInclude Include="Source\Core\Shaders\TextureShader.h" />
-    <ClInclude Include="Source\Core\Textures\Texture.h" />
+    <ClInclude Include="Source\Core\Graphics\Renderer.h" />
+    <ClInclude Include="Source\Core\Graphics\Renderer.ipp" />
+    <ClInclude Include="Source\Core\Graphics\Shaders\BasicShader.h" />
+    <ClInclude Include="Source\Core\Graphics\Shaders\Shader.h" />
+    <ClInclude Include="Source\Core\Graphics\Shaders\TextureShader.h" />
+    <ClInclude Include="Source\Core\Graphics\Textures\Texture.h" />
     <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\Types\BasicVertex.h" />
     <ClInclude Include="Source\Core\Types\WorldViewProjection.h" />
-    <ClInclude Include="Source\Core\Window.h" />
+    <ClInclude Include="Source\Core\Graphics\Window.h" />
     <ClInclude Include="Source\Core\pch.h" />
     <ClInclude Include="Source\Utils\NonCopyable.h" />
   </ItemGroup>

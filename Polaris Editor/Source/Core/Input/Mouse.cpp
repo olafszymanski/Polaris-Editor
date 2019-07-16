@@ -2,7 +2,7 @@
 
 #include "Mouse.h"
 
-#include "../Window.h"
+#include "../Graphics/Window.h"
 
 std::unique_ptr<DirectX::Mouse> Mouse::s_Mouse = std::make_unique<DirectX::Mouse>();
 std::unique_ptr<DirectX::Mouse::ButtonStateTracker> Mouse::s_StateTracker = std::make_unique<DirectX::Mouse::ButtonStateTracker>();

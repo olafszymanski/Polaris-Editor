@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Types/BasicVertex.h"
+#include "../../Types/BasicVertex.h"
 
 struct BasicVertex;
 

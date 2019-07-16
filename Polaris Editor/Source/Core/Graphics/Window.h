@@ -2,7 +2,7 @@
 
 #include "../Utils/NonCopyable.h"
 
-#include "Graphics.h"
+#include "Graphics/Graphics.h"
 
 #include "Input/Keyboard.h"
 #include "Input/Mouse.h"

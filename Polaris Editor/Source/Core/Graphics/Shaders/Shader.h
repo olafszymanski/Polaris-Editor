@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Utils/NonCopyable.h"
+#include "../../../Utils/NonCopyable.h"
 
-#include "../Types/WorldViewProjection.h"
+#include "../../Types/WorldViewProjection.h"
 #include "../Buffers/ConstantBuffer.h"
 
 class Shader : public NonCopyable

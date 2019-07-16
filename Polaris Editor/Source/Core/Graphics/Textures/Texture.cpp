@@ -4,7 +4,7 @@
 
 #include "../Graphics.h"
 
-#include "../Logger.h"
+#include "../../Logger.h"
 
 Texture::Texture(const std::string& filePath)
 	: m_ShaderTextureView(nullptr), m_SamplerState(nullptr)

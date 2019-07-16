@@ -1,12 +1,12 @@
 #include "pch.h"
 
-#include "Core/Window.h"
+#include "Core/Graphics/Window.h"
 
-#include "Core/Renderer.h"
+#include "Core/Graphics/Renderer.h"
 
-#include "Core/Shaders/TextureShader.h"
+#include "Core/Graphics/Shaders/TextureShader.h"
 
-#include "Core/Drawables/TexturedObject.h"
+#include "Core/Graphics/Drawables/TexturedObject.h"
 
 #include "Core/Timer.h"
 

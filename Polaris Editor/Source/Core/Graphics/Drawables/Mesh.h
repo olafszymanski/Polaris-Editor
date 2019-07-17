@@ -28,7 +28,7 @@ public:
 	void Bind() const;
 
 	// Getter
-	inline unsigned int GetIndexCount() const { return m_IndexCount; }
+	inline const unsigned int& GetIndexCount() const { return m_IndexCount; }
 
 private:
 	VertexBuffer m_VertexBuffer;

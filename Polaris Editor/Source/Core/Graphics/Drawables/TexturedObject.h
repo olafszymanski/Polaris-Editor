@@ -18,7 +18,7 @@ public:
 	virtual void Update() override;
 
 	// Getter
-	inline Texture GetTexture() const { return m_Texture; }
+	inline const Texture& GetTexture() const { return m_Texture; }
 
 	// Setter
 	inline void SetTexture(const Texture& texture) 

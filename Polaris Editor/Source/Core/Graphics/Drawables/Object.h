@@ -18,18 +18,33 @@ public:
 	virtual void Update() override;
 
 	// Getters
-	inline virtual unsigned int GetIndexCount() const override { return m_Mesh.GetIndexCount(); }
+	inline virtual const unsigned int& GetIndexCount() const override { return m_Mesh.GetIndexCount(); }
 
-	inline DirectX::SimpleMath::Vector3 GetPosition() const { return m_Position; }
-	inline DirectX::SimpleMath::Vector3 GetRotation() const { return m_Position; }
-	inline DirectX::SimpleMath::Vector3 GetScale() const { return m_Position; }
+	inline const DirectX::SimpleMath::Vector3& GetPosition() const { return m_Position; }
+	inline const DirectX::SimpleMath::Vector3& GetRotation() const { return m_Position; }
+	inline const DirectX::SimpleMath::Vector3& GetScale() const { return m_Position; }
 
-	inline virtual DirectX::SimpleMath::Matrix GetMatrix() const override { return m_Matrix; }
+	inline virtual const DirectX::SimpleMath::Matrix& GetMatrix() const override { return m_Matrix; }
 
 	// Setters
-	inline void SetPosition(const DirectX::SimpleMath::Vector3& position) { m_Position = position; }
-	inline void SetRotation(const DirectX::SimpleMath::Vector3& rotation) { m_Rotation = rotation; }
-	inline void SetScale(const DirectX::SimpleMath::Vector3& scale) { m_Scale = scale; }
+	inline void SetPosition(const DirectX::SimpleMath::Vector3& position) 
+	{ 
+		m_Position = position;
+		
+		m_UpdateMatrix = true;
+	}
+	inline void SetRotation(const DirectX::SimpleMath::Vector3& rotation) 
+	{ 
+		m_Rotation = rotation;
+	
+		m_UpdateMatrix = true;
+	}
+	inline void SetScale(const DirectX::SimpleMath::Vector3& scale) 
+	{ 
+		m_Scale = scale;
+
+		m_UpdateMatrix = true;
+	}
 
 protected:
 	Mesh m_Mesh;
@@ -39,4 +54,7 @@ protected:
 	DirectX::SimpleMath::Vector3 m_Scale;
 
 	DirectX::SimpleMath::Matrix m_Matrix;
+
+private:
+	bool m_UpdateMatrix;
 };

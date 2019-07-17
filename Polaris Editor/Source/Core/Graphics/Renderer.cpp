@@ -6,6 +6,8 @@
 
 #include "Drawables/Drawable.h"
 
+#include "Cameras/Camera.h"
+
 Renderer::Renderer()
 	: m_BasicShader(), m_TextureShader()
 	, m_Objects({ }), m_TexturedObjects({ }) 
@@ -32,8 +34,10 @@ void Renderer::PushDrawables(const std::vector<Drawable*>& drawables)
 	}
 }
 
-void Renderer::Draw()
+void Renderer::Draw(Camera& camera)
 {
+	camera.Update();
+
 	for (auto& drawable : m_Objects)
 	{
 		drawable->Bind();
@@ -42,7 +46,7 @@ void Renderer::Draw()
 	
 		drawable->Update();
 
-		m_BasicShader.UpdateWorldViewProjection(drawable->GetMatrix());
+		m_BasicShader.UpdateWorldViewProjection((drawable->GetMatrix() * camera.GetMatrix()).Transpose());
 
 		Graphics::GetDeviceContext()->DrawIndexed(drawable->GetIndexCount(), 0, 0);
 	}
@@ -55,7 +59,7 @@ void Renderer::Draw()
 
 		drawable->Update();
 
-		m_TextureShader.UpdateWorldViewProjection(drawable->GetMatrix());
+		m_TextureShader.UpdateWorldViewProjection((drawable->GetMatrix() * camera.GetMatrix()).Transpose());
 
 		Graphics::GetDeviceContext()->DrawIndexed(drawable->GetIndexCount(), 0, 0);
 	}

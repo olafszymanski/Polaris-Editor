@@ -8,6 +8,8 @@
 
 #include "Core/Graphics/Drawables/TexturedObject.h"
 
+#include "Core/Graphics/Cameras/Camera.h"
+
 #include "Core/Timer.h"
 
 const std::array<BasicVertex, 4> vertices
@@ -29,6 +31,7 @@ public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
 		, m_Object({ vertices, indices }, { 1.0f, 0.0f, 0.0f }), m_TexturedObject({ vertices, indices }, { "Resources/Textures/Crate.jpg" }, { 0.0f, 0.0f, 0.0f })
+		, m_Camera(m_Window, { 0.0f, 0.0f, -3.0f })
 	{
 		m_Renderer.PushDrawables({ &m_TexturedObject, &m_Object });
 	}
@@ -60,6 +63,8 @@ private:
 	Object m_Object;
 	TexturedObject m_TexturedObject;
 
+	Camera m_Camera;
+
 private:
 	void Update()
 	{
@@ -67,7 +72,7 @@ private:
 	}
 	void Render()
 	{
-		m_Renderer.Draw();
+		m_Renderer.Draw(m_Camera);
 	}
 };
 

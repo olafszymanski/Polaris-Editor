@@ -11,7 +11,7 @@ public:
 	virtual void Update() = 0;
 
 	// Getters
-	virtual unsigned int GetIndexCount() const = 0;
+	virtual const unsigned int& GetIndexCount() const = 0;
 
-	virtual DirectX::SimpleMath::Matrix GetMatrix() const = 0;
+	virtual const DirectX::SimpleMath::Matrix& GetMatrix() const = 0;
 };

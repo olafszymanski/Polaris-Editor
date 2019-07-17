@@ -2,6 +2,8 @@
 
 class Drawable;
 
+class Camera;
+
 #include "Shaders/BasicShader.h"
 #include "Shaders/TextureShader.h"
 
@@ -21,7 +23,7 @@ public:
 	void PushDrawables(const std::array<Drawable*, N>& drawables);
 	void PushDrawables(const std::vector<Drawable*>& drawables);
 
-	void Draw();
+	void Draw(Camera& camera);
 
 	void Present();
 

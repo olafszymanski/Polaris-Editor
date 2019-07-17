@@ -18,14 +18,14 @@ public:
 	void Close();
 
 	// Getters
-	inline unsigned int GetWidth() const { return m_Width; }
-	inline unsigned int GetHeight() const { return m_Height; }
-	inline std::string GetTitle() const { return m_Title; }
-	inline bool IsResizable() const { return m_Width; }
+	inline const unsigned int& GetWidth() const { return m_Width; }
+	inline const unsigned int& GetHeight() const { return m_Height; }
+	inline const std::string& GetTitle() const { return m_Title; }
+	inline const bool& IsResizable() const { return m_Width; }
 
-	inline HWND GetHandle() const { return m_Handle; }
+	inline const HWND& GetHandle() const { return m_Handle; }
 
-	inline bool IsOpen() const { return m_Open; }
+	inline const bool& IsOpen() const { return m_Open; }
 
 private:
 	unsigned int m_Width, m_Height;

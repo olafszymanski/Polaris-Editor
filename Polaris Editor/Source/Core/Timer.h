@@ -6,8 +6,8 @@ public:
 	static void Tick();
 
 	// Getters
-	inline static float GetDeltaTime() { return s_DeltaTime; }
-	inline static unsigned int GetFramesPerSecond() { return s_FramesPerSecond; }
+	inline static const float& GetDeltaTime() { return s_DeltaTime; }
+	inline static const unsigned int& GetFramesPerSecond() { return s_FramesPerSecond; }
 
 private:
 	static float s_DeltaTime;

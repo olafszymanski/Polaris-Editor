@@ -168,6 +168,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Cameras\Camera.cpp" />
     <ClCompile Include="Source\Core\Graphics\Drawables\Mesh.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
@@ -236,6 +237,7 @@
     <ClInclude Include="Source\Core\Graphics\Buffers\IndexBuffer.ipp" />
     <ClInclude Include="Source\Core\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Core\Graphics\Buffers\VertexBuffer.ipp" />
+    <ClInclude Include="Source\Core\Graphics\Cameras\Camera.h" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Drawable.h" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.h" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.ipp" />

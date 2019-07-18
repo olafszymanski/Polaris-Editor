@@ -38,7 +38,7 @@ void Camera::Update()
 {
 	if (m_UpdateMatrices)
 	{
-		m_ViewMatrix = DirectX::SimpleMath::Matrix::CreateTranslation(m_Position) * DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+		m_ViewMatrix = DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::SimpleMath::Matrix::CreateTranslation(m_Position);
 
 		m_Matrix = m_ViewMatrix * m_ProjectionMatrix;
 

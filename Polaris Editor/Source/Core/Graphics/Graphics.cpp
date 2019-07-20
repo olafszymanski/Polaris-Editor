@@ -49,7 +49,7 @@ void Graphics::CreateDevice()
 	{
 		POLARIS_DX_ASSERT(s_Device->CheckMultisampleQualityLevels(DXGI_FORMAT_B8G8R8A8_UNORM, s_SampleCount, &s_MultisamplingQuality), "Failed to check multisampling quality!");
 
-		if (s_MultisamplingQuality > 0) s_MultisamplingQuality -= 1;
+	if (s_MultisamplingQuality > 0) s_MultisamplingQuality -= 1;
 	}
 }
 
@@ -149,7 +149,7 @@ void Graphics::CreateRasterizerState()
 	D3D11_RASTERIZER_DESC rasterizerDesc { };
 	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_BACK;
-	rasterizerDesc.FrontCounterClockwise = false;
+	rasterizerDesc.FrontCounterClockwise = true;
 	rasterizerDesc.DepthBias = 0;
 	rasterizerDesc.DepthBiasClamp = 0.0f;
 	rasterizerDesc.SlopeScaledDepthBias = 0.0f;

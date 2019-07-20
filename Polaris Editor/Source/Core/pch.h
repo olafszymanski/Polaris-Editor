@@ -15,11 +15,13 @@
 #include <Mouse.h>
 
 #include <SimpleMath.h>
-#include <DirectXColors.h>
-
-#include <WICTextureLoader.h>
 
 #include <Windows.h>
 #include <wrl.h>
+
+#include <assimp/scene.h>
+#include <assimp/cimport.h>
+#include <assimp/postprocess.h>
+#include <assimp/material.h>
 
 #define __FILENAME__ (std::strrchr(__FILE__, '\\') ? std::strrchr(__FILE__, '\\') + 1 : __FILE__)

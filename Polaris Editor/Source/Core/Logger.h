@@ -11,7 +11,7 @@ private:
 };
 
 #ifdef _DEBUG
-	#define POLARIS_WIN_API_ASSERT(x, message)								\
+	#define POLARIS_ASSERT(x, message)								\
 		if (!x)																\
 		{																	\
 			Logger::Error(message, __FILENAME__, __LINE__);					\
@@ -24,6 +24,6 @@ private:
 			__debugbreak();													\
 		}
 #else
-	#define POLARIS_WIN_API_ASSERT(x, message) x;
+	#define POLARIS_ASSERT(x, message) x;
 	#define POLARIS_DX_ASSERT(x, message) x;
 #endif

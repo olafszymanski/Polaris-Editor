@@ -6,6 +6,10 @@ class Graphics
 {
 public:
 	// Getters
+	inline static bool IsMultisampling() { return s_Multisampling; }
+	inline static unsigned int GetSampleCount() { return s_SampleCount; }
+	inline static unsigned int GetMultisamplingQuality() { return s_MultisamplingQuality; }
+
 	inline static Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() { return s_Device; }
 	inline static Microsoft::WRL::ComPtr<ID3D11DeviceContext>& GetDeviceContext() { return s_DeviceContext; }
 
@@ -35,14 +39,14 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D11RasterizerState> s_RasterizerState;
 
 private:
-	void CreateDevice();
+	static void CreateDevice();
 
-	void CreateSwapChain(const Window& window);
+	static void CreateSwapChain(const Window& window);
 
-	void CreateRenderTargetView();
-	void CreateDepthStencilView(const Window& window);
+	static void CreateRenderTargetView();
+	static void CreateDepthStencilView(const Window& window);
 
-	void CreateViewport(const Window& window);
+	static void CreateViewport(const Window& window);
 
-	void CreateRasterizerState();
+	static void CreateRasterizerState();
 };

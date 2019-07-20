@@ -5,10 +5,8 @@ class Drawable;
 class Camera;
 
 #include "Shaders/BasicShader.h"
-#include "Shaders/TextureShader.h"
 
 #include "Drawables/Object.h"
-#include "Drawables/TexturedObject.h"
 
 class Renderer
 {
@@ -18,10 +16,10 @@ public:
 
 	void ClearScreen();
 
-	void PushDrawable(const Drawable& drawable);
+	void PushObject(Object& object);
 	template<unsigned int N>
-	void PushDrawables(const std::array<Drawable*, N>& drawables);
-	void PushDrawables(const std::vector<Drawable*>& drawables);
+	void PushObjects(const std::array<Object*, N>& objects);
+	void PushObjects(const std::vector<Object*>& objects);
 
 	void Draw(Camera& camera);
 
@@ -29,10 +27,8 @@ public:
 
 private:
 	BasicShader m_BasicShader;
-	TextureShader m_TextureShader;
 
 	std::vector<Object*> m_Objects;
-	std::vector<TexturedObject*> m_TexturedObjects;
 };
 
 #include "Renderer.ipp"

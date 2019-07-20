@@ -4,6 +4,7 @@ class Texture
 {
 public:
 	Texture(const std::string& filePath);
+	Texture(int width, int height, const DirectX::SimpleMath::Vector4& color);
 	~Texture() = default;
 
 	Texture(const Texture& other);
@@ -13,5 +14,4 @@ public:
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_ShaderTextureView;
-	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_SamplerState;
 };

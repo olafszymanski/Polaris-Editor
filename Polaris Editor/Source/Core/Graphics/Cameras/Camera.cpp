@@ -6,7 +6,7 @@
 
 Camera::Camera(const Window& window, const DirectX::SimpleMath::Vector3& position, const DirectX::SimpleMath::Vector3& rotation, float fieldOfView, float nearPlane, float farPlane)
 	: m_Position(position), m_Rotation(rotation)
-	, m_ViewMatrix(DirectX::SimpleMath::Matrix::CreateTranslation(m_Position) * DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z)), m_ProjectionMatrix(DirectX::SimpleMath::Matrix::CreatePerspectiveFieldOfView(fieldOfView, static_cast<float>(window.GetWidth()) / static_cast<float>(window.GetHeight()), nearPlane, farPlane)), m_Matrix(m_ViewMatrix * m_ProjectionMatrix)
+	, m_ViewMatrix(DirectX::SimpleMath::Matrix::CreateTranslation(m_Position)), m_ProjectionMatrix(DirectX::SimpleMath::Matrix::CreatePerspectiveFieldOfView(fieldOfView, static_cast<float>(window.GetWidth()) / static_cast<float>(window.GetHeight()), nearPlane, farPlane)), m_Matrix(m_ViewMatrix * m_ProjectionMatrix)
 	, m_UpdateMatrices(false)
 {
 }
@@ -38,7 +38,7 @@ void Camera::Update()
 {
 	if (m_UpdateMatrices)
 	{
-		m_ViewMatrix = DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z) * DirectX::SimpleMath::Matrix::CreateTranslation(m_Position);
+		m_ViewMatrix = DirectX::SimpleMath::Matrix::CreateTranslation(m_Position);
 
 		m_Matrix = m_ViewMatrix * m_ProjectionMatrix;
 

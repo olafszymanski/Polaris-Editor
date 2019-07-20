@@ -48,9 +48,6 @@
     <ClCompile Include="Source\Core\Graphics\Drawables\Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Drawables\TexturedObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Textures\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,9 +55,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Shaders\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Shaders\TextureShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Buffers\ConstantBuffer.cpp">
@@ -73,6 +67,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Cameras\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Graphics\Drawables\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\StringHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,9 +90,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utils\NonCopyable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Types\BasicVertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Types\WorldViewProjection.h">
@@ -113,16 +110,10 @@
     <ClInclude Include="Source\Core\Graphics\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Graphics\Drawables\Drawable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Graphics\Drawables\TexturedObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Graphics\Drawables\Object.h">
@@ -135,9 +126,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Graphics\Shaders\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Graphics\Shaders\TextureShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Graphics\Buffers\ConstantBuffer.h">
@@ -161,19 +149,24 @@
     <ClInclude Include="Source\Core\Graphics\Cameras\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Graphics\Drawables\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Types\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\StringHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\Shaders\Compiled\BasicPixelShader.cso" />
     <None Include="Resources\Shaders\Compiled\BasicVertexShader.cso" />
-    <None Include="Resources\Shaders\Compiled\TexturePixelShader.cso" />
-    <None Include="Resources\Shaders\Compiled\TextureVertexShader.cso" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Source\BasicPixelShader.hlsl" />
     <FxCompile Include="Resources\Shaders\Source\BasicVertexShader.hlsl" />
-    <FxCompile Include="Resources\Shaders\Source\TexturePixelShader.hlsl" />
-    <FxCompile Include="Resources\Shaders\Source\TextureVertexShader.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Crate.jpg">

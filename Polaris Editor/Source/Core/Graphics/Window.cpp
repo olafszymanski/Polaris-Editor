@@ -28,9 +28,9 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 	windowClass.lpszClassName = CLASS_NAME;
 	windowClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
-	POLARIS_WIN_API_ASSERT(RegisterClassEx(&windowClass), "Failed to register WNDCLASSEX!");
+	POLARIS_ASSERT(RegisterClassEx(&windowClass), "Failed to register WNDCLASSEX!");
 
-	POLARIS_WIN_API_ASSERT((m_Handle = CreateWindowEx(NULL, "Polaris Editor", "title", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, NULL, NULL, m_Instance, this)), "Failed to create window!");
+	POLARIS_ASSERT((m_Handle = CreateWindowEx(NULL, CLASS_NAME, m_Title.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, NULL, NULL, m_Instance, this)), "Failed to create window!");
 
 	ShowWindow(m_Handle, SW_SHOWDEFAULT);
 
@@ -42,7 +42,7 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 }
 Window::~Window()
 {
-	POLARIS_WIN_API_ASSERT(UnregisterClass(CLASS_NAME, m_Instance), "Failed to unregister window class!");
+	POLARIS_ASSERT(UnregisterClass(CLASS_NAME, m_Instance), "Failed to unregister window class!");
 }
 
 void Window::Update()
@@ -117,7 +117,7 @@ LRESULT Window::HandleEvents(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 		m_Open = false;
 
-		POLARIS_WIN_API_ASSERT(DestroyWindow(m_Handle), "Failed to destroy window!");
+		POLARIS_ASSERT(DestroyWindow(m_Handle), "Failed to destroy window!");
 		break;
 	}
 

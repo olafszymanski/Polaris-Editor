@@ -4,14 +4,15 @@
 
 #include "Graphics/Graphics.h"
 
-#include "Drawables/Drawable.h"
-
 #include "Cameras/Camera.h"
 
+#include <DirectXColors.h>
+
 Renderer::Renderer()
-	: m_BasicShader(), m_TextureShader()
-	, m_Objects({ }), m_TexturedObjects({ }) 
+	: m_BasicShader()
+	, m_Objects({ })
 {
+	m_BasicShader.Bind();
 }
 
 void Renderer::ClearScreen()
@@ -20,17 +21,15 @@ void Renderer::ClearScreen()
 	Graphics::GetDeviceContext()->ClearDepthStencilView(Graphics::GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 1);
 }
 
-void Renderer::PushDrawable(const Drawable& drawable)
+void Renderer::PushObject(Object& object)
 {
-	if (dynamic_cast<TexturedObject*>(const_cast<Drawable*>(&drawable))) m_TexturedObjects.push_back(static_cast<TexturedObject*>(const_cast<Drawable*>(&drawable)));
-	else m_Objects.push_back(static_cast<Object*>(const_cast<Drawable*>(&drawable)));
+	m_Objects.push_back(&object);
 }
-void Renderer::PushDrawables(const std::vector<Drawable*>& drawables)
+void Renderer::PushObjects(const std::vector<Object*>& objects)
 {
-	for (auto& drawable : drawables)
+	for (auto& object : objects)
 	{
-		if (dynamic_cast<TexturedObject*>(drawable)) m_TexturedObjects.push_back(static_cast<TexturedObject*>(drawable));
-		else m_Objects.push_back(static_cast<Object*>(drawable));
+		m_Objects.push_back(object);
 	}
 }
 
@@ -38,30 +37,20 @@ void Renderer::Draw(Camera& camera)
 {
 	camera.Update();
 
-	for (auto& drawable : m_Objects)
+	for (auto& object : m_Objects)
 	{
-		drawable->Bind();
-		
-		m_BasicShader.Bind();
-	
-		drawable->Update();
+		object->UpdateMatrix();
 
-		m_BasicShader.UpdateWorldViewProjection((drawable->GetMatrix() * camera.GetMatrix()).Transpose());
+		m_BasicShader.UpdateWorldViewProjection((object->GetMatrix() * camera.GetMatrix()).Transpose());
 
-		Graphics::GetDeviceContext()->DrawIndexed(drawable->GetIndexCount(), 0, 0);
-	}
+		for (unsigned int i = 0; i < object->GetModel().GetMeshes().size(); ++i)
+		{
+			object->Bind(i);
 
-	for (auto& drawable : m_TexturedObjects)
-	{
-		drawable->Bind();
+			object->UpdateMesh(i);
 
-		m_TextureShader.Bind();
-
-		drawable->Update();
-
-		m_TextureShader.UpdateWorldViewProjection((drawable->GetMatrix() * camera.GetMatrix()).Transpose());
-
-		Graphics::GetDeviceContext()->DrawIndexed(drawable->GetIndexCount(), 0, 0);
+			Graphics::GetDeviceContext()->DrawIndexed(object->GetModel().GetMeshes()[i]->GetIndexCount(), 0, 0);
+		}
 	}
 }
 

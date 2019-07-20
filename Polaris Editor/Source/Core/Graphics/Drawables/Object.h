@@ -1,30 +1,29 @@
 #pragma once
 
-#include "Drawable.h"
+#include "Model.h"
 
-#include "Mesh.h"
-
-class Object : public Drawable
+class Object
 {
 public:
-	Object(const Mesh& mesh, const DirectX::SimpleMath::Vector3& position = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& rotation = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& scale = { 1.0f, 1.0f, 1.0f });
+	Object(const Model& model, const DirectX::SimpleMath::Vector3& position = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& rotation = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& scale = { 1.0f, 1.0f, 1.0f });
 	~Object() = default;
 
 	Object(const Object& other);
 	Object& operator=(const Object& other);
 
-	virtual void Bind() const override;
+	void Bind(unsigned int index) const;
 
-	virtual void Update() override;
+	void UpdateMatrix();
+	void UpdateMesh(unsigned int index);
 
 	// Getters
-	inline virtual const unsigned int& GetIndexCount() const override { return m_Mesh.GetIndexCount(); }
+	inline const Model& GetModel() const { return m_Model; }
 
 	inline const DirectX::SimpleMath::Vector3& GetPosition() const { return m_Position; }
 	inline const DirectX::SimpleMath::Vector3& GetRotation() const { return m_Position; }
 	inline const DirectX::SimpleMath::Vector3& GetScale() const { return m_Position; }
 
-	inline virtual const DirectX::SimpleMath::Matrix& GetMatrix() const override { return m_Matrix; }
+	inline const DirectX::SimpleMath::Matrix& GetMatrix() const { return m_Matrix; }
 
 	// Setters
 	inline void SetPosition(const DirectX::SimpleMath::Vector3& position) 
@@ -46,15 +45,11 @@ public:
 		m_UpdateMatrix = true;
 	}
 
-protected:
-	Mesh m_Mesh;
+private:
+	Model m_Model;
 
-	DirectX::SimpleMath::Vector3 m_Position;
-	DirectX::SimpleMath::Vector3 m_Rotation;
-	DirectX::SimpleMath::Vector3 m_Scale;
+	DirectX::SimpleMath::Vector3 m_Position, m_Rotation, m_Scale;
 
 	DirectX::SimpleMath::Matrix m_Matrix;
-
-private:
 	bool m_UpdateMatrix;
 };

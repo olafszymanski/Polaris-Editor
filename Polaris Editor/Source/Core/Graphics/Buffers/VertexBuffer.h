@@ -1,15 +1,13 @@
 #pragma once
 
-#include "../../Types/BasicVertex.h"
-
-struct BasicVertex;
+#include "../../Types/Vertex.h"
 
 class VertexBuffer
 {
 public:
 	template<unsigned int N>
-	VertexBuffer(const std::array<BasicVertex, N>& vertices, unsigned int stride = sizeof(BasicVertex), unsigned int offset = 0);
-	VertexBuffer(const std::vector<BasicVertex>& vertices, unsigned int stride = sizeof(BasicVertex), unsigned int offset = 0);
+	VertexBuffer(const std::array<Vertex, N>& vertices, unsigned int stride = sizeof(Vertex), unsigned int offset = 0);
+	VertexBuffer(const std::vector<Vertex>& vertices, unsigned int stride = sizeof(Vertex), unsigned int offset = 0);
 	~VertexBuffer() = default;
 
 	VertexBuffer(const VertexBuffer& other);

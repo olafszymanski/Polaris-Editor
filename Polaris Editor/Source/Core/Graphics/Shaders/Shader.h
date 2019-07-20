@@ -9,13 +9,15 @@ class Shader : public NonCopyable
 {
 public:
 	Shader();
-	~Shader() = default;
+	virtual ~Shader() = default;
 
 	virtual void Bind() const = 0;
 
 	void UpdateWorldViewProjection(const WorldViewProjection& worldViewProjection);
 
 protected:
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_SamplerState;
+
 	WorldViewProjection m_WorldViewProjection;
 	ConstantBuffer<WorldViewProjection> m_WorldViewProjectionBuffer;
 };

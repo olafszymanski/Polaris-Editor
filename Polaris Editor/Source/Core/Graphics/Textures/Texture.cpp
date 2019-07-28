@@ -16,8 +16,6 @@ Texture::Texture(const std::string& filePath)
 {
 	Microsoft::WRL::ComPtr<ID3D11Resource> texture = nullptr;
 
-	OutputDebugString(StringHelper::GetFileExtension(filePath).c_str());
-
 	if (StringHelper::GetFileExtension(filePath) == ".dds") { POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!"); }
 	else POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!");
 }

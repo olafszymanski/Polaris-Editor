@@ -19,7 +19,7 @@ Texture::Texture(const std::string& filePath)
 	if (StringHelper::GetFileExtension(filePath) == ".dds") { POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!"); }
 	else POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!");
 }
-Texture::Texture(int width, int height, const DirectX::SimpleMath::Vector4& color)
+Texture::Texture(unsigned int width, unsigned int height, const DirectX::SimpleMath::Vector4& color)
 	: m_ShaderTextureView(nullptr)
 {
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> texture = nullptr;
@@ -45,6 +45,13 @@ Texture::Texture(int width, int height, const DirectX::SimpleMath::Vector4& colo
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateTexture2D(&textureDesc, &subresourceData, texture.GetAddressOf()), "Failed to create ID3D11Texture2D!");
 
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateShaderResourceView(texture.Get(), nullptr, m_ShaderTextureView.GetAddressOf()), "Failed to create ID3D11ShaderResourceView!");
+}
+Texture::Texture(unsigned int size, const uint8_t* data)
+	: m_ShaderTextureView(nullptr)
+{
+	Microsoft::WRL::ComPtr<ID3D11Resource> texture = nullptr;
+
+	POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromMemory(Graphics::GetDevice().Get(), data, size, texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load embedded texture!");
 }
 
 Texture::Texture(const Texture& other)

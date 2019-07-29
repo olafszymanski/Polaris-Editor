@@ -49,6 +49,8 @@ Model::Model(const std::string& filePath)
 			}
 		}
 		
+		scene->GetEmbeddedTexture(filePath.c_str());
+
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
 		std::string directory = StringHelper::GetDirectoryFromPath(filePath);
@@ -84,7 +86,15 @@ Texture Model::GetMaterialTexture(const aiScene* scene, const aiMaterial* materi
 		aiString filename;
 		material->GetTexture(type, 0, &filename);
 
-		texture = std::make_unique<Texture>(directory + static_cast<std::string>(filename.C_Str()));
+		if (filename.C_Str()[0] == '*')
+		{
+			POLARIS_ASSERT(filename.length > 1, "There's something wrong with texture!");
+
+			int index = atoi(&filename.C_Str()[1]);
+			texture = std::make_unique<Texture>(scene->mTextures[index]->mWidth, reinterpret_cast<uint8_t*>(scene->mTextures[index]->pcData));
+		}
+		else if (auto embeddedTexture = scene->GetEmbeddedTexture(filename.C_Str())) texture = std::make_unique<Texture>(embeddedTexture->mWidth, reinterpret_cast<uint8_t*>(embeddedTexture->pcData));
+		else texture = std::make_unique<Texture>(directory + static_cast<std::string>(filename.C_Str()));
 	}
 	else
 	{

@@ -15,10 +15,10 @@ class Editor
 public:
 	Editor()
 		: m_Window(800, 600, "Polaris Editor", false)
-		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f })
+		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f }), m_Orange({ "Resources/Models/Orange.fbx" })
 		, m_Camera(m_Window, { 0.0f, 0.0f, -3.0f }), m_CameraSpeed(4.0f)
 	{
-		m_Renderer.PushObject(m_Nanosuit);
+		m_Renderer.PushObjects({ &m_Nanosuit, &m_Orange });
 	}
 	~Editor()
 	{
@@ -46,7 +46,7 @@ private:
 
 	Renderer m_Renderer;
 
-	Object m_Nanosuit;
+	Object m_Nanosuit, m_Orange;
 
 	Camera m_Camera;
 	float m_CameraSpeed;

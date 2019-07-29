@@ -4,7 +4,8 @@ class Texture
 {
 public:
 	Texture(const std::string& filePath);
-	Texture(int width, int height, const DirectX::SimpleMath::Vector4& color);
+	Texture(unsigned int width, unsigned int height, const DirectX::SimpleMath::Vector4& color);
+	Texture(unsigned int size, const uint8_t* data);
 	~Texture() = default;
 
 	Texture(const Texture& other);

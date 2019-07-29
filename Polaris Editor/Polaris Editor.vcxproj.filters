@@ -163,6 +163,7 @@
     <None Include="Resources\Shaders\Compiled\BasicPixelShader.cso" />
     <None Include="Resources\Shaders\Compiled\BasicVertexShader.cso" />
     <None Include="packages.config" />
+    <None Include="Resources\Models\Person.blend" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Source\BasicPixelShader.hlsl" />

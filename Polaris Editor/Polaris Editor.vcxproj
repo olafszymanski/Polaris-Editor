@@ -273,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Models\Person.blend" />
     <None Include="Resources\Shaders\Compiled\BasicPixelShader.cso" />
     <None Include="Resources\Shaders\Compiled\BasicVertexShader.cso" />
   </ItemGroup>

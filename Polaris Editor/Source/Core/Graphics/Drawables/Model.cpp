@@ -48,8 +48,6 @@ Model::Model(const std::string& filePath)
 				indices.push_back(face.mIndices[l]);
 			}
 		}
-		
-		scene->GetEmbeddedTexture(filePath.c_str());
 
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 

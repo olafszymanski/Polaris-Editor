@@ -6,7 +6,7 @@
 
 Shader::Shader()
 	: m_SamplerState(nullptr)
-	, m_WorldViewProjection(), m_WorldViewProjectionBuffer(m_WorldViewProjection)
+	, m_MatricesBuffer({ }), m_LightingBuffer({ }), m_MaterialBuffer({ })
 {
 	D3D11_SAMPLER_DESC samplerDesc { };
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -17,8 +17,15 @@ Shader::Shader()
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateSamplerState(&samplerDesc, m_SamplerState.GetAddressOf()), "Failed to create ID3D11SamplerState!");
 }
 
-void Shader::UpdateWorldViewProjection(const WorldViewProjection& worldViewProjection)
+void Shader::UpdateLighting(const Lighting& lighting)
 {
-	m_WorldViewProjection = worldViewProjection;
-	m_WorldViewProjectionBuffer.Update(m_WorldViewProjection);
+	m_LightingBuffer.Update(lighting);
+}
+void Shader::UpdateMatrices(const Matrices& matrices)
+{
+	m_MatricesBuffer.Update(matrices);
+}
+void Shader::UpdateMaterial(const Material& material)
+{
+	m_MaterialBuffer.Update(material);
 }

@@ -1,10 +1,8 @@
 #pragma once
 
-class Drawable;
-
 class Camera;
 
-#include "Shaders/BasicShader.h"
+#include "Shaders/PhongShader.h"
 
 #include "Drawables/Object.h"
 
@@ -26,7 +24,7 @@ public:
 	void Present();
 
 private:
-	BasicShader m_BasicShader;
+	PhongShader m_PhongShader;
 
 	std::vector<Object*> m_Objects;
 };

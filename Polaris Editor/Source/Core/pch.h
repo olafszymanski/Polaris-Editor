@@ -25,3 +25,7 @@
 #include <assimp/material.h>
 
 #define __FILENAME__ (std::strrchr(__FILE__, '\\') ? std::strrchr(__FILE__, '\\') + 1 : __FILE__)
+
+#define MAX_DIRECTIONAL_LIGHTS 32
+#define MAX_POINT_LIGHTS 256
+#define MAX_SPOT_LIGHTS 256

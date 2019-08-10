@@ -9,10 +9,10 @@
 #include <DirectXColors.h>
 
 Renderer::Renderer()
-	: m_BasicShader()
+	: m_PhongShader()
 	, m_Objects({ })
 {
-	m_BasicShader.Bind();
+	m_PhongShader.Bind();
 }
 
 void Renderer::ClearScreen()
@@ -37,17 +37,21 @@ void Renderer::Draw(Camera& camera)
 {
 	camera.Update();
 
+	m_PhongShader.UpdateLighting({ camera.GetPosition() });
+
 	for (auto& object : m_Objects)
 	{
-		object->UpdateMatrix();
+		object->Update();
 
-		m_BasicShader.UpdateWorldViewProjection((object->GetMatrix() * camera.GetMatrix()).Transpose());
+		m_PhongShader.UpdateMatrices({ object->GetMatrix(), object->GetMatrix().Invert(), (object->GetMatrix() * camera.GetMatrix()).Transpose() });
 
 		for (unsigned int i = 0; i < object->GetModel().GetMeshes().size(); ++i)
 		{
-			object->Bind(i);
+			object->GetModel().GetMeshes()[i]->Bind();
 
-			object->UpdateMesh(i);
+			m_PhongShader.UpdateMaterial(object->GetModel().GetMeshes()[i]->GetMaterial());
+
+			object->GetModel().GetMeshes()[i]->Update();
 
 			Graphics::GetDeviceContext()->DrawIndexed(object->GetModel().GetMeshes()[i]->GetIndexCount(), 0, 0);
 		}

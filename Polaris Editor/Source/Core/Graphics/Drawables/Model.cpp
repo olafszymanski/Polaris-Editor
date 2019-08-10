@@ -7,16 +7,16 @@
 Model::Model(const std::string& filePath)
 	: m_Meshes({ }) 
 {
-	const aiScene* scene = aiImportFile(filePath.c_str(), aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_GenUVCoords);
+	const aiScene* scene = aiImportFile(filePath.c_str(), aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_GenUVCoords | aiProcess_GenNormals);
 
-	POLARIS_ASSERT(scene, "Failed to load '" + filePath + "'!");
+	POLARIS_WARNING(!scene, "Failed to load '" + filePath + "'!");
 
 	m_Meshes.reserve(scene->mNumMeshes);
 
 	for (unsigned int i = 0; i < scene->mNumMeshes; ++i)
 	{
-		std::vector<Vertex> vertices = { };
-		std::vector<unsigned int> indices = { };
+		std::vector<Vertex> vertices { };
+		std::vector<unsigned int> indices { };
 
 		aiMesh* mesh = scene->mMeshes[i];
 
@@ -33,6 +33,9 @@ Model::Model(const std::string& filePath)
 				vertex.TextureCoordinate.x = mesh->mTextureCoords[0][j].x;
 				vertex.TextureCoordinate.y = mesh->mTextureCoords[0][j].y;
 			}
+			vertex.Normal.x = mesh->mNormals[j].x;
+			vertex.Normal.y = mesh->mNormals[j].y;
+			vertex.Normal.z = mesh->mNormals[j].z;
 
 			vertices.push_back(vertex);
 		}
@@ -56,7 +59,7 @@ Model::Model(const std::string& filePath)
 		Texture diffuse = GetMaterialTexture(scene, material, aiTextureType_DIFFUSE, directory);
 		Texture specular = GetMaterialTexture(scene, material, aiTextureType_SPECULAR, directory);
 
-		m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, diffuse, specular));
+		m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, GetMaterial(material), diffuse, specular));
 	}
 
 	aiReleaseImport(scene);
@@ -73,6 +76,14 @@ Model& Model::operator=(const Model& other)
 	return *this;
 }
 
+Material Model::GetMaterial(aiMaterial* material)
+{
+	float shininess = 0.0f;
+
+	aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);
+
+	return Material({ 1.0f, 1.0f, 1.0f }, shininess );
+}
 Texture Model::GetMaterialTexture(const aiScene* scene, const aiMaterial* material, aiTextureType type, const std::string& directory)
 {
 	unsigned int textureCount = material->GetTextureCount(type);

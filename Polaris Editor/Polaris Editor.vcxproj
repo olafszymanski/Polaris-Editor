@@ -195,6 +195,11 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Graphics.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Lights\DirectionalLight.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Lights\Light.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Lights\PointLight.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Lights\SpotLight.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Managers\LightManager.cpp" />
     <ClCompile Include="Source\Core\Input\Keyboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
@@ -224,7 +229,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Shaders\BasicShader.cpp">
+    <ClCompile Include="Source\Core\Graphics\Shaders\PhongShader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
@@ -255,17 +260,25 @@
     <ClInclude Include="Source\Core\Graphics\Drawables\Model.h" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Object.h" />
     <ClInclude Include="Source\Core\Graphics\Graphics.h" />
+    <ClInclude Include="Source\Core\Graphics\Lights\DirectionalLight.h" />
+    <ClInclude Include="Source\Core\Graphics\Lights\Light.h" />
+    <ClInclude Include="Source\Core\Types\Lighting.h" />
+    <ClInclude Include="Source\Core\Types\Material.h" />
+    <ClInclude Include="Source\Core\Graphics\Lights\PointLight.h" />
+    <ClInclude Include="Source\Core\Graphics\Lights\SpotLight.h" />
+    <ClInclude Include="Source\Core\Graphics\Managers\LightManager.h" />
+    <ClInclude Include="Source\Core\Graphics\Managers\LightManager.ipp" />
     <ClInclude Include="Source\Core\Input\Keyboard.h" />
     <ClInclude Include="Source\Core\Input\Mouse.h" />
     <ClInclude Include="Source\Core\Logger.h" />
     <ClInclude Include="Source\Core\Graphics\Renderer.h" />
     <ClInclude Include="Source\Core\Graphics\Renderer.ipp" />
-    <ClInclude Include="Source\Core\Graphics\Shaders\BasicShader.h" />
+    <ClInclude Include="Source\Core\Graphics\Shaders\PhongShader.h" />
     <ClInclude Include="Source\Core\Graphics\Shaders\Shader.h" />
     <ClInclude Include="Source\Core\Graphics\Textures\Texture.h" />
     <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\Types\Vertex.h" />
-    <ClInclude Include="Source\Core\Types\WorldViewProjection.h" />
+    <ClInclude Include="Source\Core\Types\Matrices.h" />
     <ClInclude Include="Source\Core\Graphics\Window.h" />
     <ClInclude Include="Source\Core\pch.h" />
     <ClInclude Include="Source\Utils\NonCopyable.h" />
@@ -273,12 +286,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\Models\Person.blend" />
-    <None Include="Resources\Shaders\Compiled\BasicPixelShader.cso" />
-    <None Include="Resources\Shaders\Compiled\BasicVertexShader.cso" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\Shaders\Source\BasicPixelShader.hlsl">
+    <FxCompile Include="Resources\Shaders\Source\PhongPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -288,7 +298,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\Source\BasicVertexShader.hlsl">
+    <FxCompile Include="Resources\Shaders\Source\PhongVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

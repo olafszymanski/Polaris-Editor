@@ -8,17 +8,23 @@
 
 #include "Core/Graphics/Cameras/Camera.h"
 
+#include "Core/Graphics/Managers/LightManager.h"
+
 #include "Core/Timer.h"
 
 class Editor
 {
 public:
 	Editor()
-		: m_Window(800, 600, "Polaris Editor", false)
-		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f }), m_Orange({ "Resources/Models/Orange.fbx" })
-		, m_Camera(m_Window, { 0.0f, 0.0f, -3.0f }), m_CameraSpeed(4.0f)
+		: m_Window(1280, 760, "Polaris Editor", false)
+		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f })
+		, m_Camera(m_Window, { 0.0f, 10.0f, 5.0f }), m_CameraSpeed(10.0f)
 	{
-		m_Renderer.PushObjects({ &m_Nanosuit, &m_Orange });
+		m_Renderer.PushObject(m_Nanosuit);
+
+		LightManager::AddDirectionalLight({ { 0.0f, 0.0f, -1.0f } }, "DirectionalLight");
+		LightManager::AddPointLight({ { 0.0f, 15.0f, 7.5f }, { 1.0f, 0.09f, 0.032f }, { 0.0f, 1.0f, 0.0f } }, "PointLight");
+		LightManager::AddSpotLight({ { 0.0f, 10.0f, 7.5f }, 0.89f, { 0.0f, 0.0f, -1.0f }, { 1.0f, 0.09f, 0.032f }, { 0.0f, 0.0f, 1.0f } }, "SpotLight");
 	}
 	~Editor()
 	{
@@ -46,7 +52,7 @@ private:
 
 	Renderer m_Renderer;
 
-	Object m_Nanosuit, m_Orange;
+	Object m_Nanosuit;
 
 	Camera m_Camera;
 	float m_CameraSpeed;
@@ -54,12 +60,12 @@ private:
 private:
 	void HandleInput()
 	{
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::W)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y, m_Camera.GetPosition().z + m_CameraSpeed * Timer::GetDeltaTime() });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::S)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y, m_Camera.GetPosition().z - m_CameraSpeed * Timer::GetDeltaTime() });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::A)) m_Camera.SetPosition({ m_Camera.GetPosition().x + m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().y, m_Camera.GetPosition().z });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::D)) m_Camera.SetPosition({ m_Camera.GetPosition().x - m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().y, m_Camera.GetPosition().z });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::X)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y + m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().z });
-		if (Keyboard::IsKeyDown(DirectX::Keyboard::Z)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y - m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::W)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y, m_Camera.GetPosition().z - m_CameraSpeed * Timer::GetDeltaTime() });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::S)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y, m_Camera.GetPosition().z + m_CameraSpeed * Timer::GetDeltaTime() });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::A)) m_Camera.SetPosition({ m_Camera.GetPosition().x - m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().y, m_Camera.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::D)) m_Camera.SetPosition({ m_Camera.GetPosition().x + m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().y, m_Camera.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::X)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y - m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().z });
+		if (Keyboard::IsKeyDown(DirectX::Keyboard::Z)) m_Camera.SetPosition({ m_Camera.GetPosition().x, m_Camera.GetPosition().y + m_CameraSpeed * Timer::GetDeltaTime(), m_Camera.GetPosition().z });
 	}
 	void Update()
 	{

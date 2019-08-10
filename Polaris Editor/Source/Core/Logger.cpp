@@ -9,3 +9,7 @@ void Logger::Error(const std::string& message, const std::string& filename, unsi
 
 	MessageBox(NULL, messageBoxMessage.str().c_str(), "Polaris Editor Error", MB_OK | MB_ICONERROR);
 }
+void Logger::Warning(const std::string& message, const std::string& filename, unsigned int line)
+{
+	MessageBox(NULL, message.c_str(), "Polaris Editor Warning", MB_OK | MB_ICONWARNING);
+}

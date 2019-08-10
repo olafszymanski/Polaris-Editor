@@ -4,6 +4,7 @@ class Logger
 {
 public:
 	static void Error(const std::string& message, const std::string& filename, unsigned int line);
+	static void Warning(const std::string& message, const std::string& filename, unsigned int line);
 
 private:
 	Logger() = default;
@@ -11,8 +12,8 @@ private:
 };
 
 #ifdef _DEBUG
-	#define POLARIS_ASSERT(x, message)								\
-		if (!x)																\
+	#define POLARIS_ASSERT(x, message)										\
+		if (!(x))															\
 		{																	\
 			Logger::Error(message, __FILENAME__, __LINE__);					\
 			__debugbreak();													\
@@ -27,3 +28,10 @@ private:
 	#define POLARIS_ASSERT(x, message) x;
 	#define POLARIS_DX_ASSERT(x, message) x;
 #endif
+
+#define POLARIS_WARNING(x, message)											\
+	if (x)																	\
+	{																		\
+		Logger::Warning(message, __FILENAME__, __LINE__);					\
+		return;																\
+	}

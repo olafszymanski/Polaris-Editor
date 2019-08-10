@@ -11,10 +11,7 @@ public:
 	Object(const Object& other);
 	Object& operator=(const Object& other);
 
-	void Bind(unsigned int index) const;
-
-	void UpdateMatrix();
-	void UpdateMesh(unsigned int index);
+	void Update();
 
 	// Getters
 	inline const Model& GetModel() const { return m_Model; }

@@ -4,7 +4,7 @@ ConstantBuffer<T>::ConstantBuffer(const T& data)
 	: m_Buffer(nullptr)
 {
 	D3D11_BUFFER_DESC bufferDesc { };
-	bufferDesc.ByteWidth = sizeof(data) < 16 ? 16 : sizeof(data);
+	bufferDesc.ByteWidth = sizeof(data);
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;

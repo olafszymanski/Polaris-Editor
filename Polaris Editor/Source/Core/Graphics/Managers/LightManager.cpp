@@ -2,9 +2,9 @@
 
 #include "LightManager.h"
 
-std::array<std::pair<std::shared_ptr<DirectionalLight>, std::string>, MAX_DIRECTIONAL_LIGHTS> LightManager::s_DirectionalLights;
-std::array<std::pair<std::shared_ptr<PointLight>, std::string>, MAX_POINT_LIGHTS> LightManager::s_PointLights;
-std::array<std::pair<std::shared_ptr<SpotLight>, std::string>, MAX_SPOT_LIGHTS> LightManager::s_SpotLights;
+std::array<std::pair<std::shared_ptr<DirectionalLight>, std::string>, MAX_DIRECTIONAL_LIGHTS> LightManager::s_DirectionalLights { };
+std::array<std::pair<std::shared_ptr<PointLight>, std::string>, MAX_POINT_LIGHTS> LightManager::s_PointLights { };
+std::array<std::pair<std::shared_ptr<SpotLight>, std::string>, MAX_SPOT_LIGHTS> LightManager::s_SpotLights { };
 
 void LightManager::AddDirectionalLight(const DirectionalLight& light, const std::string& name)
 {

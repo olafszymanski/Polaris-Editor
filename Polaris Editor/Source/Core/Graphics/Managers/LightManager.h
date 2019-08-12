@@ -56,7 +56,7 @@ public:
 		return lights;
 	}
 
-	inline static std::shared_ptr<DirectionalLight>& GetDirectionalLight(const std::string& name) 
+	inline static const std::shared_ptr<DirectionalLight>& GetDirectionalLight(const std::string& name) 
 	{ 
 		if (!name.empty())
 		{
@@ -68,7 +68,7 @@ public:
 
 		POLARIS_ASSERT(false, "Failed to find a DirectionalLight with the name of '" + name + "'!");
 	}
-	inline static std::shared_ptr<PointLight>& GetPointLight(const std::string& name)
+	inline static const std::shared_ptr<PointLight>& GetPointLight(const std::string& name)
 	{
 		if (!name.empty())
 		{
@@ -80,7 +80,7 @@ public:
 
 		POLARIS_ASSERT(false, "Failed to find a PointLight with the name of '" + name + "'!");
 	}
-	inline static std::shared_ptr<SpotLight>& GetSpotLight(const std::string& name)
+	inline static const std::shared_ptr<SpotLight>& GetSpotLight(const std::string& name)
 	{
 		if (!name.empty())
 		{

@@ -4,6 +4,8 @@
 
 #include "../Graphics.h"
 
+#include "../Managers/ResourceManager.h"
+
 #include <DDSTextureLoader.h>
 #include <WICTextureLoader.h>
 
@@ -14,10 +16,16 @@
 Texture::Texture(const std::string& filePath)
 	: m_ShaderTextureView(nullptr)
 {
-	Microsoft::WRL::ComPtr<ID3D11Resource> texture = nullptr;
+	if (ResourceManager::TextureExists(filePath)) *this = ResourceManager::GetTexture(filePath);
+	else
+	{
+		Microsoft::WRL::ComPtr<ID3D11Resource> texture = nullptr;
 
-	if (StringHelper::GetFileExtension(filePath) == ".dds") { POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!"); }
-	else POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!");
+		if (StringHelper::GetFileExtension(filePath) == ".dds") { POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!"); }
+		else POLARIS_DX_ASSERT(DirectX::CreateWICTextureFromFile(Graphics::GetDevice().Get(), std::wstring(filePath.begin(), filePath.end()).c_str(), texture.GetAddressOf(), m_ShaderTextureView.GetAddressOf()), "Failed to load '" + filePath + "'!");
+
+		ResourceManager::AddTexture(*this, filePath);
+	}
 }
 Texture::Texture(unsigned int width, unsigned int height, const DirectX::SimpleMath::Vector4& color)
 	: m_ShaderTextureView(nullptr)

@@ -7,6 +7,7 @@
 #include <sstream>
 #include <array>
 #include <vector>
+#include <unordered_map>
 
 #include <d3d11.h>
 #include <d3dcompiler.h>

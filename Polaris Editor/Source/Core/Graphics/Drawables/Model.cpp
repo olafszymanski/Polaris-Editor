@@ -2,67 +2,75 @@
 
 #include "Model.h"
 
+#include "../Managers/ResourceManager.h"
+
 #include "../../../Utils/StringHelper.h"
 
 Model::Model(const std::string& filePath)
 	: m_Meshes({ }) 
 {
-	const aiScene* scene = aiImportFile(filePath.c_str(), aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_GenUVCoords | aiProcess_GenNormals);
-
-	POLARIS_WARNING(!scene, "Failed to load '" + filePath + "'!");
-
-	m_Meshes.reserve(scene->mNumMeshes);
-
-	for (unsigned int i = 0; i < scene->mNumMeshes; ++i)
+	if (ResourceManager::ModelExists(filePath)) *this = ResourceManager::GetModel(filePath);
+	else
 	{
-		std::vector<Vertex> vertices { };
-		std::vector<unsigned int> indices { };
+		const aiScene* scene = aiImportFile(filePath.c_str(), aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_GenUVCoords | aiProcess_GenNormals);
 
-		aiMesh* mesh = scene->mMeshes[i];
+		POLARIS_WARNING(!scene, "Failed to load '" + filePath + "'!");
 
-		vertices.reserve(mesh->mNumVertices);
+		m_Meshes.reserve(scene->mNumMeshes);
 
-		for (unsigned int j = 0; j < mesh->mNumVertices; ++j)
+		for (unsigned int i = 0; i < scene->mNumMeshes; ++i)
 		{
-			Vertex vertex;
-			vertex.Position.x = mesh->mVertices[j].x;
-			vertex.Position.y = mesh->mVertices[j].y;
-			vertex.Position.z = mesh->mVertices[j].z;
-			if (mesh->mTextureCoords[0])
-			{
-				vertex.TextureCoordinate.x = mesh->mTextureCoords[0][j].x;
-				vertex.TextureCoordinate.y = mesh->mTextureCoords[0][j].y;
-			}
-			vertex.Normal.x = mesh->mNormals[j].x;
-			vertex.Normal.y = mesh->mNormals[j].y;
-			vertex.Normal.z = mesh->mNormals[j].z;
+			std::vector<Vertex> vertices{ };
+			std::vector<unsigned int> indices{ };
 
-			vertices.push_back(vertex);
+			aiMesh* mesh = scene->mMeshes[i];
+
+			vertices.reserve(mesh->mNumVertices);
+
+			for (unsigned int j = 0; j < mesh->mNumVertices; ++j)
+			{
+				Vertex vertex;
+				vertex.Position.x = mesh->mVertices[j].x;
+				vertex.Position.y = mesh->mVertices[j].y;
+				vertex.Position.z = mesh->mVertices[j].z;
+				if (mesh->mTextureCoords[0])
+				{
+					vertex.TextureCoordinate.x = mesh->mTextureCoords[0][j].x;
+					vertex.TextureCoordinate.y = mesh->mTextureCoords[0][j].y;
+				}
+				vertex.Normal.x = mesh->mNormals[j].x;
+				vertex.Normal.y = mesh->mNormals[j].y;
+				vertex.Normal.z = mesh->mNormals[j].z;
+
+				vertices.push_back(vertex);
+			}
+
+			for (unsigned int k = 0; k < mesh->mNumFaces; ++k)
+			{
+				aiFace face = mesh->mFaces[k];
+
+				indices.reserve(face.mNumIndices);
+
+				for (unsigned int l = 0; l < face.mNumIndices; ++l)
+				{
+					indices.push_back(face.mIndices[l]);
+				}
+			}
+
+			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+
+			std::string directory = StringHelper::GetDirectoryFromPath(filePath);
+
+			Texture diffuse = GetMaterialTexture(scene, material, aiTextureType_DIFFUSE, directory);
+			Texture specular = GetMaterialTexture(scene, material, aiTextureType_SPECULAR, directory);
+
+			m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, GetMaterial(material), diffuse, specular));
 		}
 
-		for (unsigned int k = 0; k < mesh->mNumFaces; ++k)
-		{
-			aiFace face = mesh->mFaces[k];
+		aiReleaseImport(scene);
 
-			indices.reserve(face.mNumIndices);
-
-			for (unsigned int l = 0; l < face.mNumIndices; ++l)
-			{
-				indices.push_back(face.mIndices[l]);
-			}
-		}
-
-		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
-		std::string directory = StringHelper::GetDirectoryFromPath(filePath);
-
-		Texture diffuse = GetMaterialTexture(scene, material, aiTextureType_DIFFUSE, directory);
-		Texture specular = GetMaterialTexture(scene, material, aiTextureType_SPECULAR, directory);
-
-		m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, GetMaterial(material), diffuse, specular));
+		ResourceManager::AddModel(*this, filePath);
 	}
-
-	aiReleaseImport(scene);
 }
 
 Model::Model(const Model& other)

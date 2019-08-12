@@ -200,6 +200,7 @@
     <ClCompile Include="Source\Core\Graphics\Lights\PointLight.cpp" />
     <ClCompile Include="Source\Core\Graphics\Lights\SpotLight.cpp" />
     <ClCompile Include="Source\Core\Graphics\Managers\LightManager.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Managers\ResourceManager.cpp" />
     <ClCompile Include="Source\Core\Input\Keyboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
@@ -262,6 +263,7 @@
     <ClInclude Include="Source\Core\Graphics\Graphics.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\DirectionalLight.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\Light.h" />
+    <ClInclude Include="Source\Core\Graphics\Managers\ResourceManager.h" />
     <ClInclude Include="Source\Core\Types\Lighting.h" />
     <ClInclude Include="Source\Core\Types\Material.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\PointLight.h" />
@@ -286,6 +288,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Shaders\Compiled\PhongPixelShader.cso" />
+    <None Include="Resources\Shaders\Compiled\PhongVertexShader.cso" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Source\PhongPixelShader.hlsl">

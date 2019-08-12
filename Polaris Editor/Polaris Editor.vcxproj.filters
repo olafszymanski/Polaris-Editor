@@ -90,6 +90,9 @@
     <ClCompile Include="Source\Core\Graphics\Shaders\PhongShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Graphics\Managers\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\pch.h">
@@ -197,9 +200,14 @@
     <ClInclude Include="Source\Core\Graphics\Shaders\PhongShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Graphics\Managers\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Shaders\Compiled\PhongPixelShader.cso" />
+    <None Include="Resources\Shaders\Compiled\PhongVertexShader.cso" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\Source\PhongPixelShader.hlsl" />

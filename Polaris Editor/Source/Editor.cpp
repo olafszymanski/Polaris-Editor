@@ -9,6 +9,7 @@
 #include "Core/Graphics/Cameras/Camera.h"
 
 #include "Core/Graphics/Managers/LightManager.h"
+#include "Core/Graphics/Managers/ResourceManager.h"
 
 #include "Core/Timer.h"
 
@@ -28,7 +29,6 @@ public:
 	}
 	~Editor()
 	{
-
 	}
 
 	void Run()
@@ -70,6 +70,8 @@ private:
 	void Update()
 	{
 		m_Window.Update();
+
+		m_Nanosuit.Update();
 	}
 	void Render()
 	{

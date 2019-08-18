@@ -33,17 +33,15 @@ void Renderer::PushObjects(const std::vector<Object*>& objects)
 	}
 }
 
-void Renderer::Draw(Camera& camera)
+void Renderer::Draw(const Camera& camera)
 {
-	camera.Update();
-
 	m_PhongShader.UpdateLighting({ camera.GetPosition() });
 
 	for (auto& object : m_Objects)
 	{
 		object->Update();
 
-		m_PhongShader.UpdateMatrices({ object->GetMatrix(), object->GetMatrix().Invert(), (object->GetMatrix() * camera.GetMatrix()).Transpose() });
+		m_PhongShader.UpdateMatrices({ object->GetMatrix().Transpose(), object->GetMatrix().Invert().Transpose(), (object->GetMatrix() * camera.GetMatrix()).Transpose() });
 
 		for (unsigned int i = 0; i < object->GetModel().GetMeshes().size(); ++i)
 		{

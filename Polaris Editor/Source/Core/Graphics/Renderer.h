@@ -19,7 +19,7 @@ public:
 	void PushObjects(const std::array<Object*, N>& objects);
 	void PushObjects(const std::vector<Object*>& objects);
 
-	void Draw(Camera& camera);
+	void Draw(const Camera& camera);
 
 	void Present();
 

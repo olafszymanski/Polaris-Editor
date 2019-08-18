@@ -153,6 +153,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\assimp\include;Source\Core</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -181,6 +182,7 @@
     </ClCompile>
     <ClCompile Include="Source\Core\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Core\Graphics\Cameras\Camera.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Cameras\FreeCamera.cpp" />
     <ClCompile Include="Source\Core\Graphics\Drawables\Mesh.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
@@ -256,6 +258,7 @@
     <ClInclude Include="Source\Core\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Core\Graphics\Buffers\VertexBuffer.ipp" />
     <ClInclude Include="Source\Core\Graphics\Cameras\Camera.h" />
+    <ClInclude Include="Source\Core\Graphics\Cameras\FreeCamera.h" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.h" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Mesh.ipp" />
     <ClInclude Include="Source\Core\Graphics\Drawables\Model.h" />

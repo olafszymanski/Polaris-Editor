@@ -5,6 +5,7 @@
 #include "../Graphics/Window.h"
 
 std::unique_ptr<DirectX::Mouse> Mouse::s_Mouse = std::make_unique<DirectX::Mouse>();
+DirectX::Mouse::State Mouse::s_State;
 std::unique_ptr<DirectX::Mouse::ButtonStateTracker> Mouse::s_StateTracker = std::make_unique<DirectX::Mouse::ButtonStateTracker>();
 
 bool Mouse::IsButtonPressed(MouseButton button)
@@ -120,20 +121,6 @@ bool Mouse::IsButtonUp(MouseButton button)
 	}
 }
 
-bool Mouse::IsScrolling()
-{
-	int scrollWheelValue = GetScrollWheelValue();
-
-	s_Mouse->ResetScrollWheelValue();
-
-	return scrollWheelValue != 0;
-}
-
-int Mouse::GetScrollWheelValue()
-{
-	return s_Mouse->GetState().scrollWheelValue;
-}
-
 void Mouse::SetWindow(const Window& window)
 {
 	s_Mouse->SetWindow(window.GetHandle());
@@ -146,5 +133,6 @@ void Mouse::HandleInput(UINT message, WPARAM wParam, LPARAM lParam)
 
 void Mouse::Update()
 {
-	s_StateTracker->Update(s_Mouse->GetState());
+	s_State = s_Mouse->GetState();
+	s_StateTracker->Update(s_State);
 }

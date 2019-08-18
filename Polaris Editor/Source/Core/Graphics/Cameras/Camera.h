@@ -1,45 +1,75 @@
 #pragma once
 
-#include "../../../Utils/NonCopyable.h"
-
 class Window;
 
 class Camera
 {
 public:
-	Camera(const Window& window, const DirectX::SimpleMath::Vector3& position = { 0.0f, 0.0f, 0.0f }, const DirectX::SimpleMath::Vector3& rotation = { 0.0f, 0.0f, 0.0f }, float fieldOfView = DirectX::XM_PIDIV4, float nearPlane = 0.1f, float farPlane = 100.0f);
-	~Camera() = default;
+	Camera(const Window& window, const DirectX::SimpleMath::Vector3& position = { 0.0f, 0.0f, 0.0f }, float fieldOfView = DirectX::XM_PIDIV4, float nearPlane = 0.1f, float farPlane = 100.0f);
+	virtual ~Camera() = default;
 
 	Camera(const Camera& other);
 	Camera& operator=(const Camera& other);
 
-	virtual void Update();
+	virtual void Update(float deltaTime);
 
 	// Getters
 	inline const DirectX::SimpleMath::Vector3& GetPosition() const { return m_Position; }
-	inline const DirectX::SimpleMath::Vector3& GetRotation() const { return m_Rotation; }
+	inline const DirectX::SimpleMath::Vector3& GetForward() const { return m_Forward; }
+	inline const DirectX::SimpleMath::Vector3& GetUp() const { return m_Up; }
 
-	inline DirectX::SimpleMath::Matrix GetMatrix() const { return m_Matrix; }
+	inline const float& GetFieldOfView() const { return m_FieldOfView; }
+	inline const float& GetNearPlane() const { return m_NearPlane; }
+	inline const float& GetFarPlane() const { return m_FarPlane; }
+
+	inline const DirectX::SimpleMath::Matrix& GetMatrix() const { return m_Matrix; }
 
 	// Setters
 	inline void SetPosition(const DirectX::SimpleMath::Vector3& position) 
 	{ 
 		m_Position = position; 
 		
-		m_UpdateMatrices = true;
+		m_UpdateViewMatrix = true;
 	}
-	inline void SetRotation(const DirectX::SimpleMath::Vector3& rotation) 
+	inline void SetForward(const DirectX::SimpleMath::Vector3& forward)
+	{
+		m_Forward = forward;
+
+		m_UpdateViewMatrix = true;
+	}
+	inline void SetUp(const DirectX::SimpleMath::Vector3& up)
+	{
+		m_Up = up;
+
+		m_UpdateViewMatrix = true;
+	}
+
+	inline void SetFieldOfView(float fieldOfView) 
 	{ 
-		m_Rotation = rotation; 
-	
-		m_UpdateMatrices = true;
+		m_FieldOfView = fieldOfView;
+
+		m_UpdateProjectionMatrix = true;
+	}
+	inline void SetNearPlane(float nearPlane)
+	{ 
+		m_NearPlane = nearPlane;
+
+		m_UpdateProjectionMatrix = true;
+	}
+	inline void SetFarPlane(float farPlane)
+	{ 
+		m_FarPlane = farPlane;
+
+		m_UpdateProjectionMatrix = true;
 	}
 
 protected:
-	DirectX::SimpleMath::Vector3 m_Position, m_Rotation;
+	const Window* m_Window;
+
+	DirectX::SimpleMath::Vector3 m_Position, m_Forward, m_Up;
+	
+	float m_FieldOfView, m_NearPlane, m_FarPlane;
 
 	DirectX::SimpleMath::Matrix m_ViewMatrix, m_ProjectionMatrix, m_Matrix;
-
-private:
-	bool m_UpdateMatrices;
+	bool m_UpdateViewMatrix, m_UpdateProjectionMatrix;
 };

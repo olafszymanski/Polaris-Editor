@@ -2,7 +2,7 @@
 
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned short>& indices, const Material& material, const Texture& diffuseTexture, const Texture& specularTexture)
+Mesh::Mesh(const std::vector<VertexStructure>& vertices, const std::vector<unsigned short>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture)
 	: m_VertexBuffer(vertices), m_IndexBuffer(indices)
 	, m_IndexCount(indices.size())
 	, m_Material(material)
@@ -10,7 +10,7 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned short
 	, m_UpdateDiffuseTexture(false), m_UpdateSpecularTexture(false)
 {
 }
-Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const Material& material, const Texture& diffuseTexture, const Texture& specularTexture)
+Mesh::Mesh(const std::vector<VertexStructure>& vertices, const std::vector<unsigned int>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture)
 	: m_VertexBuffer(vertices), m_IndexBuffer(indices)
 	, m_IndexCount(indices.size())
 	, m_Material(material)

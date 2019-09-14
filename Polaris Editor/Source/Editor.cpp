@@ -21,15 +21,12 @@ class Editor
 public:
 	Editor()
 		: m_Window(1280, 760, "Polaris Editor", false)
+		, m_DirectionalLight({ 0.0f, 0.0f, -1.0f }, { 1.0f, 1.0f, 1.0f })
 		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f })
 		, m_Camera(m_Window, { 0.0f, 10.0f, 5.0f })
 		, m_CameraWidget(m_Camera), m_InfoWidget(m_Window)
 	{
 		m_Renderer.PushObject(m_Nanosuit);
-
-		LightManager::AddDirectionalLight({ { 0.0f, 0.0f, -1.0f } }, "DirectionalLight");
-		LightManager::AddPointLight({ { 0.0f, 15.0f, 7.5f }, { 1.0f, 0.09f, 0.032f }, { 0.0f, 1.0f, 0.0f } }, "PointLight");
-		LightManager::AddSpotLight({ { 0.0f, 10.0f, 7.5f }, 0.89f, { 0.0f, 0.0f, -1.0f }, { 1.0f, 0.09f, 0.032f }, { 0.0f, 0.0f, 1.0f } }, "SpotLight");
 	}
 	~Editor()
 	{
@@ -41,9 +38,7 @@ public:
 		{
 			Timer::Tick();
 
-			float deltaTime = Timer::GetDeltaTime();
-
-			Update(deltaTime);
+			Update(Timer::GetDeltaTime());
 			Render();
 		}
 	}
@@ -53,6 +48,8 @@ private:
 
 	Renderer m_Renderer;
 	WidgetRenderer m_WidgetRenderer;
+
+	DirectionalLight m_DirectionalLight;
 
 	Object m_Nanosuit;
 

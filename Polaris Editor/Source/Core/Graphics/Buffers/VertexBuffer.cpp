@@ -4,12 +4,12 @@
 
 #include "../Graphics.h"
 
-VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices, unsigned int stride, unsigned int offset)
+VertexBuffer::VertexBuffer(const std::vector<VertexStructure>& vertices, unsigned int stride, unsigned int offset)
 	: m_Buffer(nullptr)
 	, m_Stride(stride), m_Offset(offset)
 {
 	D3D11_BUFFER_DESC bufferDesc { };
-	bufferDesc.ByteWidth = sizeof(Vertex) * vertices.size();
+	bufferDesc.ByteWidth = sizeof(VertexStructure) * vertices.size();
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;

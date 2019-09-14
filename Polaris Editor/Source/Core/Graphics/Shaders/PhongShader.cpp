@@ -6,13 +6,13 @@
 
 #include "../../Logger.h"
 
-#include "../../Types/Vertex.h"
+#include "../../Structures/Structures.h"
 
 const std::array<D3D11_INPUT_ELEMENT_DESC, 3> INPUT_ELEMENTS =
 {
-	D3D11_INPUT_ELEMENT_DESC { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, Position), D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	D3D11_INPUT_ELEMENT_DESC { "TEXTURE_COORDINATE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(Vertex, TextureCoordinate), D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	D3D11_INPUT_ELEMENT_DESC { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(Vertex, Normal), D3D11_INPUT_PER_VERTEX_DATA, 0 }
+	D3D11_INPUT_ELEMENT_DESC { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(VertexStructure, Position), D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	D3D11_INPUT_ELEMENT_DESC { "TEXTURE_COORDINATE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(VertexStructure, TextureCoordinate), D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	D3D11_INPUT_ELEMENT_DESC { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(VertexStructure, Normal), D3D11_INPUT_PER_VERTEX_DATA, 0 }
 };
 
 PhongShader::PhongShader()

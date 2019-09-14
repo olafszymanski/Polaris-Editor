@@ -20,7 +20,7 @@ Model::Model(const std::string& filePath)
 
 		for (unsigned int i = 0; i < scene->mNumMeshes; ++i)
 		{
-			std::vector<Vertex> vertices { };
+			std::vector<VertexStructure> vertices { };
 			std::vector<unsigned int> indices { };
 
 			aiMesh* mesh = scene->mMeshes[i];
@@ -29,7 +29,7 @@ Model::Model(const std::string& filePath)
 
 			for (unsigned int j = 0; j < mesh->mNumVertices; ++j)
 			{
-				Vertex vertex;
+				VertexStructure vertex;
 				vertex.Position.x = mesh->mVertices[j].x;
 				vertex.Position.y = mesh->mVertices[j].y;
 				vertex.Position.z = mesh->mVertices[j].z;
@@ -84,13 +84,13 @@ Model& Model::operator=(const Model& other)
 	return *this;
 }
 
-Material Model::GetMaterial(aiMaterial* material)
+MaterialStructure Model::GetMaterial(aiMaterial* material)
 {
 	float shininess = 0.0f;
 
 	aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);
 
-	return Material({ 1.0f, 1.0f, 1.0f }, shininess );
+	return MaterialStructure({ 1.0f, 1.0f, 1.0f }, shininess );
 }
 Texture Model::GetMaterialTexture(const aiScene* scene, const aiMaterial* material, aiTextureType type, const std::string& directory)
 {

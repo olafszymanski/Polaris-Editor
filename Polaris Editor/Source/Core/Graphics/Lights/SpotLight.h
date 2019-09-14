@@ -5,13 +5,9 @@
 class SpotLight : public Light
 {
 public:
-	SpotLight();
 	SpotLight(const DirectX::SimpleMath::Vector3& position, float cutOff, const DirectX::SimpleMath::Vector3& direction, const DirectX::SimpleMath::Vector3& attenuation, const DirectX::SimpleMath::Vector4& ambient = { 1.0f, 1.0f, 1.0f, 1.0f }, const DirectX::SimpleMath::Vector4& diffuse = { 1.0f, 1.0f, 1.0f, 1.0f }, const DirectX::SimpleMath::Vector4& specular = { 1.0f, 1.0f, 1.0f, 1.0f }, float intensity = 1.0f);
 	SpotLight(const DirectX::SimpleMath::Vector3& position, float cutOff, const DirectX::SimpleMath::Vector3& direction, const DirectX::SimpleMath::Vector3& attenuation, const DirectX::SimpleMath::Vector3& color, float intensity = 1.0f);
-	~SpotLight() = default;
-
-	SpotLight(const SpotLight& other);
-	SpotLight& operator=(const SpotLight& other);
+	~SpotLight();
 
 	// Getters
 	inline const DirectX::SimpleMath::Vector3& GetPosition() const { return m_Position; }

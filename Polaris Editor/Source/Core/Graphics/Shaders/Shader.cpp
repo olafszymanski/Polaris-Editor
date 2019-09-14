@@ -17,15 +17,15 @@ Shader::Shader()
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateSamplerState(&samplerDesc, m_SamplerState.GetAddressOf()), "Failed to create ID3D11SamplerState!");
 }
 
-void Shader::UpdateLighting(const Lighting& lighting)
+void Shader::UpdateLighting(const LightingStructure& lighting)
 {
 	m_LightingBuffer.Update(lighting);
 }
-void Shader::UpdateMatrices(const Matrices& matrices)
+void Shader::UpdateMatrices(const MatricesStructure& matrices)
 {
 	m_MatricesBuffer.Update(matrices);
 }
-void Shader::UpdateMaterial(const Material& material)
+void Shader::UpdateMaterial(const MaterialStructure& material)
 {
 	m_MaterialBuffer.Update(material);
 }

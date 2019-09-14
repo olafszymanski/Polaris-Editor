@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../../Types/Vertex.h"
+#include "../../Structures/Structures.h"
 
 class VertexBuffer
 {
 public:
 	template<unsigned int N>
-	VertexBuffer(const std::array<Vertex, N>& vertices, unsigned int stride = sizeof(Vertex), unsigned int offset = 0);
-	VertexBuffer(const std::vector<Vertex>& vertices, unsigned int stride = sizeof(Vertex), unsigned int offset = 0);
+	VertexBuffer(const std::array<VertexStructure, N>& vertices, unsigned int stride = sizeof(VertexStructure), unsigned int offset = 0);
+	VertexBuffer(const std::vector<VertexStructure>& vertices, unsigned int stride = sizeof(VertexStructure), unsigned int offset = 0);
 	~VertexBuffer() = default;
 
 	VertexBuffer(const VertexBuffer& other);

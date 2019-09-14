@@ -6,7 +6,7 @@ class Widget : public NonCopyable
 {
 public:
 	Widget();
-	virtual ~Widget() = default;
+	virtual ~Widget();
 
 	void Draw();
 
@@ -17,5 +17,7 @@ protected:
 	virtual void DrawImGui() = 0;
 
 private:
+	unsigned int m_ID;
+	
 	bool m_Draw;
 };

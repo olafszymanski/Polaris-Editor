@@ -30,8 +30,4 @@ private:
 #endif
 
 #define POLARIS_WARNING(x, message)											\
-	if (x)																	\
-	{																		\
-		Logger::Warning(message, __FILENAME__, __LINE__);					\
-		return;																\
-	}
+	if (x) Logger::Warning(message, __FILENAME__, __LINE__);

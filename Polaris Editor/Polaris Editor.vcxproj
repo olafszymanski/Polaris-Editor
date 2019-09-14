@@ -355,12 +355,10 @@
     <ClInclude Include="Source\Core\Graphics\Lights\DirectionalLight.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\Light.h" />
     <ClInclude Include="Source\Core\Graphics\Managers\ResourceManager.h" />
-    <ClInclude Include="Source\Core\Types\Lighting.h" />
-    <ClInclude Include="Source\Core\Types\Material.h" />
+    <ClInclude Include="Source\Core\Structures\Structures.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\PointLight.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\SpotLight.h" />
     <ClInclude Include="Source\Core\Graphics\Managers\LightManager.h" />
-    <ClInclude Include="Source\Core\Graphics\Managers\LightManager.ipp" />
     <ClInclude Include="Source\Core\Input\Keyboard.h" />
     <ClInclude Include="Source\Core\Input\Mouse.h" />
     <ClInclude Include="Source\Core\Logger.h" />
@@ -370,8 +368,6 @@
     <ClInclude Include="Source\Core\Graphics\Shaders\Shader.h" />
     <ClInclude Include="Source\Core\Graphics\Textures\Texture.h" />
     <ClInclude Include="Source\Core\Timer.h" />
-    <ClInclude Include="Source\Core\Types\Vertex.h" />
-    <ClInclude Include="Source\Core\Types\Matrices.h" />
     <ClInclude Include="Source\Core\Graphics\Window.h" />
     <ClInclude Include="Source\Core\pch.h" />
     <ClInclude Include="Source\Utils\NonCopyable.h" />

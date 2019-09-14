@@ -2,190 +2,54 @@
 
 #include "LightManager.h"
 
-std::array<std::pair<std::shared_ptr<DirectionalLight>, std::string>, MAX_DIRECTIONAL_LIGHTS> LightManager::s_DirectionalLights { };
-std::array<std::pair<std::shared_ptr<PointLight>, std::string>, MAX_POINT_LIGHTS> LightManager::s_PointLights { };
-std::array<std::pair<std::shared_ptr<SpotLight>, std::string>, MAX_SPOT_LIGHTS> LightManager::s_SpotLights { };
+#include "../../Logger.h"
 
-void LightManager::AddDirectionalLight(const DirectionalLight& light, const std::string& name)
+std::unordered_map<unsigned int, DirectionalLight*> LightManager::s_DirectionalLights { };
+unsigned int LightManager::s_CurrentDirectionalLightID = 0;
+std::unordered_map<unsigned int, PointLight*> LightManager::s_PointLights { };
+unsigned int LightManager::s_CurrentPointLightID = 0;
+std::unordered_map<unsigned int, SpotLight*> LightManager::s_SpotLights { };
+unsigned int LightManager::s_CurrentSpotLightID = 0;
+
+unsigned int LightManager::AddDirectionalLight(DirectionalLight& directionalLight)
 {
-	POLARIS_WARNING(name.empty(), "DirectionalLight's name cannot be empty!");
-	POLARIS_WARNING(IsNameUsed(s_DirectionalLights, name), "DirectionalLight with the same name already exists!");
+	POLARIS_WARNING(s_CurrentDirectionalLightID > MAX_DIRECTIONAL_LIGHTS - 1, "You're trying to create too many DirectionalLights!");
 
-	bool space = true;
+	s_DirectionalLights[s_CurrentDirectionalLightID] = &directionalLight;
 
-	for (unsigned int i = 0; i < MAX_DIRECTIONAL_LIGHTS; ++i)
-	{
-		if (s_DirectionalLights[i].second.empty())
-		{
-			s_DirectionalLights[i] = std::make_pair(std::make_shared<DirectionalLight>(light), name);
+	s_CurrentDirectionalLightID += 1;
 
-			return;
-		}
-		else space = false;
-	}
-
-	POLARIS_WARNING(!space, "You're trying to add too many directional lights!");
+	return s_CurrentDirectionalLightID - 1;
 }
-void LightManager::AddPointLight(const PointLight& light, const std::string& name)
+void LightManager::RemoveDirectionalLight(unsigned int ID)
 {
-	POLARIS_WARNING(name.empty(), "PointLight's name cannot be empty!");
-	POLARIS_WARNING(IsNameUsed(s_PointLights, name), "PointLight with the name of '" + name + "' already exists!");
-
-	bool space = true;
-
-	for (unsigned int i = 0; i < MAX_POINT_LIGHTS; ++i)
-	{
-		if (s_PointLights[i].second.empty())
-		{
-			s_PointLights[i] = std::make_pair(std::make_shared<PointLight>(light), name);
-
-			return;
-		}
-		else space = false;
-	}
-
-	POLARIS_WARNING(!space, "You're trying to add too many point lights!");
+	s_DirectionalLights[ID] = nullptr;
 }
-void LightManager::AddSpotLight(const SpotLight& light, const std::string& name)
+unsigned int LightManager::AddPointLight(PointLight& pointLight)
 {
-	POLARIS_WARNING(name.empty(), "SpotLight's name cannot be empty!");
-	POLARIS_WARNING(IsNameUsed(s_SpotLights, name), "SpotLight with the name of '" + name + "' already exists!");
+	POLARIS_WARNING(s_CurrentPointLightID > MAX_POINT_LIGHTS - 1, "You're trying to create too many PointLights!");
 
-	bool space = true;
+	s_PointLights[s_CurrentPointLightID] = &pointLight;
 
-	for (unsigned int i = 0; i < MAX_SPOT_LIGHTS; ++i)
-	{
-		if (s_PointLights[i].second.empty())
-		{
-			s_SpotLights[i] = std::make_pair(std::make_shared<SpotLight>(light), name);
+	s_CurrentPointLightID += 1;
 
-			return;
-		}
-		else space = false;
-	}
-
-	POLARIS_WARNING(!space, "You're trying to add too many spot lights!");
+	return s_CurrentPointLightID - 1;
 }
-
-void LightManager::AddDirectionalLight(const std::shared_ptr<DirectionalLight>& light, const std::string& name)
+void LightManager::RemovePointLight(unsigned int ID)
 {
-	POLARIS_WARNING(name.empty(), "DirectionalLight's name cannot be empty!");
-	POLARIS_WARNING(IsNameUsed(s_DirectionalLights, name), "DirectionalLight with the same name already exists!");
-
-	bool space = true;
-
-	for (unsigned int i = 0; i < MAX_DIRECTIONAL_LIGHTS; ++i)
-	{
-		if (s_DirectionalLights[i].second.empty())
-		{
-			s_DirectionalLights[i] = std::make_pair(light, name);
-
-			return;
-		}
-		else space = false;
-	}
-
-	POLARIS_WARNING(!space, "You're trying to add too many directional lights!");
+	s_SpotLights[ID] = nullptr;
 }
-void LightManager::AddPointLight(const std::shared_ptr<PointLight>& light, const std::string& name)
+unsigned int LightManager::AddSpotLight(SpotLight& spotLight)
 {
-	POLARIS_WARNING(name.empty(), "PointLight's name cannot be empty!");
-	POLARIS_WARNING(IsNameUsed(s_PointLights, name), "PointLight with the name of '" + name + "' already exists!");
+	POLARIS_WARNING(s_CurrentSpotLightID > MAX_SPOT_LIGHTS - 1, "You're trying to create too many SpotLight!");
 
-	bool space = true;
+	s_SpotLights[s_CurrentSpotLightID] = &spotLight;
 
-	for (unsigned int i = 0; i < MAX_POINT_LIGHTS; ++i)
-	{
-		if (s_PointLights[i].second.empty())
-		{
-			s_PointLights[i] = std::make_pair(light, name);
+	s_CurrentSpotLightID += 1;
 
-			return;
-		}
-		else space = false;
-	}
-
-	POLARIS_WARNING(!space, "You're trying to add too many point lights!");
+	return s_CurrentSpotLightID - 1;
 }
-void LightManager::AddSpotLight(const std::shared_ptr<SpotLight>& light, const std::string& name)
+void LightManager::RemoveSpotLight(unsigned int ID)
 {
-	POLARIS_WARNING(name.empty(), "SpotLight's name cannot be empty!");
-	POLARIS_WARNING(IsNameUsed(s_SpotLights, name), "SpotLight with the name of '" + name + "' already exists!");
-
-	bool space = true;
-
-	for (unsigned int i = 0; i < MAX_SPOT_LIGHTS; ++i)
-	{
-		if (s_PointLights[i].second.empty())
-		{
-			s_SpotLights[i] = std::make_pair(light, name);
-
-			return;
-		}
-		else space = false;
-	}
-
-	POLARIS_WARNING(!space, "You're trying to add too many spot lights!");
-}
-
-void LightManager::RemoveDirectionalLight(const std::string& name)
-{
-	POLARIS_WARNING(name.empty(), "DirectionalLight's name cannot be empty!");
-
-	bool found = false;
-
-	for (unsigned int i = 0; i < MAX_DIRECTIONAL_LIGHTS; ++i)
-	{
-		if (name == s_DirectionalLights[i].second)
-		{
-			s_DirectionalLights[i] = std::make_pair(std::make_shared<DirectionalLight>(), "");
-
-			found = true;
-		}
-
-		if (found) break;
-	}
-
-	POLARIS_WARNING(!found, "Failed to find a DirectionalLight with the name of '" + name + "'!");
-	
-}
-void LightManager::RemovePointLight(const std::string& name)
-{
-	POLARIS_WARNING(name.empty(), "PointLight's name cannot be empty!");
-
-	bool found = false;
-	
-	for (unsigned int i = 0; i < MAX_POINT_LIGHTS; ++i)
-	{
-		if (name == s_PointLights[i].second)
-		{
-			s_PointLights[i] = std::make_pair(std::make_shared<PointLight>(), "");
-
-			found = true;
-		}
-
-		if (found) break;
-	}
-
-	POLARIS_WARNING(!found, "Failed to find a PointLight with the name of '" + name + "'!");
-}
-void LightManager::RemoveSpotLight(const std::string& name)
-{
-	POLARIS_WARNING(name.empty(), "SpotLight's name cannot be empty!");
-
-	bool found = false;
-
-	for (unsigned int i = 0; i < MAX_SPOT_LIGHTS; ++i)
-	{
-		if (name == s_PointLights[i].second)
-		{
-			s_SpotLights[i] = std::make_pair(std::make_shared<SpotLight>(), "");
-
-			found = true;
-		}
-
-		if (found) break;
-	}
-
-	POLARIS_WARNING(!found, "Failed to find a SpotLight with the name of '" + name + "'!");
+	s_PointLights[ID] = nullptr;
 }

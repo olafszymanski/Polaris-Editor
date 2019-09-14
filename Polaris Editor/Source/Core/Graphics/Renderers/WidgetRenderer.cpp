@@ -35,7 +35,7 @@ void WidgetRenderer::Draw()
 
 	for (auto& widget : WidgetManager::GetWidgets())
 	{
-		widget->Draw();
+		if (widget.second != nullptr) widget.second->Draw();
 	}
 
 	ImGui::Render();

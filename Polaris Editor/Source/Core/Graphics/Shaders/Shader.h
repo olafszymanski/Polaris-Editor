@@ -2,9 +2,7 @@
 
 #include "../../../Utils/NonCopyable.h"
 
-#include "../../Types/Matrices.h"
-#include "../../Types/Lighting.h"
-#include "../../Types/Material.h"
+#include "../../Structures/Structures.h"
 
 #include "../Buffers/ConstantBuffer.h"
 
@@ -16,14 +14,14 @@ public:
 
 	virtual void Bind() const = 0;
 
-	void UpdateLighting(const Lighting& lighting);
-	void UpdateMatrices(const Matrices& matrices);
-	void UpdateMaterial(const Material& material);
+	void UpdateLighting(const LightingStructure& lighting);
+	void UpdateMatrices(const MatricesStructure& matrices);
+	void UpdateMaterial(const MaterialStructure& material);
 
 protected:
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_SamplerState;
 
-	ConstantBuffer<Matrices> m_MatricesBuffer;
-	ConstantBuffer<Lighting> m_LightingBuffer;
-	ConstantBuffer<Material> m_MaterialBuffer;
+	ConstantBuffer<MatricesStructure> m_MatricesBuffer;
+	ConstantBuffer<LightingStructure> m_LightingBuffer;
+	ConstantBuffer<MaterialStructure> m_MaterialBuffer;
 };

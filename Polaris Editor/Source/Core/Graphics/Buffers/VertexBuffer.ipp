@@ -1,12 +1,12 @@
 #include "../../Logger.h"
 
 template<unsigned int N>
-VertexBuffer::VertexBuffer(const std::array<Vertex, N>& vertices, unsigned int stride, unsigned int offset)
+VertexBuffer::VertexBuffer(const std::array<VertexStructure, N>& vertices, unsigned int stride, unsigned int offset)
 	: m_Buffer(nullptr)
 	, m_Stride(stride), m_Offset(offset)
 {
 	D3D11_BUFFER_DESC bufferDesc { };
-	bufferDesc.ByteWidth = sizeof(Vertex) * N;
+	bufferDesc.ByteWidth = sizeof(VertexStructure) * N;
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;

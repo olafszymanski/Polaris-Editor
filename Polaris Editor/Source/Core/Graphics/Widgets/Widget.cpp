@@ -5,9 +5,14 @@
 #include "../Managers/WidgetManager.h"
 
 Widget::Widget()
-	: m_Draw(true)
+	: m_ID(0)
+	, m_Draw(true)
 {
-	WidgetManager::AddWidget(*this);
+	m_ID = WidgetManager::AddWidget(*this);
+}
+Widget::~Widget()
+{
+	WidgetManager::RemoveWidget(m_ID);
 }
 
 void Widget::Draw()

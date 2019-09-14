@@ -18,6 +18,6 @@ private:
 	std::vector<std::shared_ptr<Mesh>> m_Meshes;
 
 private:
-	Material GetMaterial(aiMaterial* material);
+	MaterialStructure GetMaterial(aiMaterial* material);
 	Texture GetMaterialTexture(const aiScene* scene, const aiMaterial* material, aiTextureType type, const std::string& directory);
 };

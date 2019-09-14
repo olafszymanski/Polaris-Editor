@@ -4,10 +4,8 @@
 
 struct Light
 {
-    uint Type;
-    float2 TypePadding;
-    
     float Intensity;
+    float3 IntensityPadding;
 
     float4 Ambient;
     float4 Diffuse;

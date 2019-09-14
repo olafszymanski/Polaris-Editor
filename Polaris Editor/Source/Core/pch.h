@@ -25,6 +25,8 @@
 #include <assimp/postprocess.h>
 #include <assimp/material.h>
 
+#include "Graphics/Widgets/ImGui/imgui.h"
+
 #define __FILENAME__ (std::strrchr(__FILE__, '\\') ? std::strrchr(__FILE__, '\\') + 1 : __FILE__)
 
 #define MAX_DIRECTIONAL_LIGHTS 32

@@ -2,9 +2,9 @@
 
 #include "Renderer.h"
 
-#include "Graphics/Graphics.h"
+#include "../Graphics.h"
 
-#include "Cameras/Camera.h"
+#include "../Cameras/Camera.h"
 
 #include <DirectXColors.h>
 
@@ -17,6 +17,8 @@ Renderer::Renderer()
 
 void Renderer::ClearScreen()
 {
+	Graphics::GetDeviceContext()->OMSetRenderTargets(1, Graphics::GetRenderTargetView().GetAddressOf(), Graphics::GetDepthStencilView().Get());
+
 	Graphics::GetDeviceContext()->ClearRenderTargetView(Graphics::GetRenderTargetView().Get(), DirectX::Colors::Black);
 	Graphics::GetDeviceContext()->ClearDepthStencilView(Graphics::GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 1);
 }
@@ -43,15 +45,15 @@ void Renderer::Draw(const Camera& camera)
 
 		m_PhongShader.UpdateMatrices({ object->GetMatrix().Transpose(), object->GetMatrix().Invert().Transpose(), (object->GetMatrix() * camera.GetMatrix()).Transpose() });
 
-		for (unsigned int i = 0; i < object->GetModel().GetMeshes().size(); ++i)
+		for (auto& mesh : object->GetModel().GetMeshes())
 		{
-			object->GetModel().GetMeshes()[i]->Bind();
+			mesh->Bind();
 
-			m_PhongShader.UpdateMaterial(object->GetModel().GetMeshes()[i]->GetMaterial());
+			m_PhongShader.UpdateMaterial(mesh->GetMaterial());
 
-			object->GetModel().GetMeshes()[i]->Update();
+			mesh->Update();
 
-			Graphics::GetDeviceContext()->DrawIndexed(object->GetModel().GetMeshes()[i]->GetIndexCount(), 0, 0);
+			Graphics::GetDeviceContext()->DrawIndexed(mesh->GetIndexCount(), 0, 0);
 		}
 	}
 }

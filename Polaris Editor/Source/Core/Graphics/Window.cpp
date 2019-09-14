@@ -4,6 +4,9 @@
 
 #include "Logger.h"
 
+#include "Widgets/ImGui/imgui_impl_dx11.h"
+#include "Widgets/ImGui/imgui_impl_win32.h"
+
 const char* CLASS_NAME = "Polaris Editor";
 
 Window::Window(unsigned int width, unsigned int height, const std::string& title, bool resizable)
@@ -33,10 +36,25 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 	POLARIS_ASSERT((m_Handle = CreateWindowEx(NULL, CLASS_NAME, m_Title.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, NULL, NULL, m_Instance, this)), "Failed to create window!");
 
 	ShowWindow(m_Handle, SW_SHOWDEFAULT);
+	UpdateWindow(m_Handle);
 
 	Mouse::SetWindow(*this);
 
 	Graphics::Initialize(*this);
+
+	ImGui::CreateContext();
+
+	ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard | ImGuiConfigFlags_DockingEnable | ImGuiConfigFlags_ViewportsEnable;
+	io.ConfigViewportsNoTaskBarIcon = true;
+	io.ConfigViewportsNoDefaultParent = true;
+	io.ConfigDockingAlwaysTabBar = true;
+	io.ConfigDockingTransparentPayload = true;
+
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplWin32_Init(m_Handle);
+	ImGui_ImplDX11_Init(Graphics::GetDevice().Get(), Graphics::GetDeviceContext().Get());
 
 	m_Open = true;
 }
@@ -62,6 +80,8 @@ void Window::Close()
 	m_Open = false;
 }
 
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT Window::WindowProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
 	if (Msg == WM_NCCREATE)
@@ -83,6 +103,8 @@ LRESULT Window::WindowProcAdapter(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lPa
 
 LRESULT Window::HandleEvents(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, Msg, wParam, lParam)) return true;
+
 	switch (Msg)
 	{
 	case WM_ACTIVATEAPP:

@@ -2,9 +2,9 @@
 
 class Camera;
 
-#include "Shaders/PhongShader.h"
+#include "../Shaders/PhongShader.h"
 
-#include "Drawables/Object.h"
+#include "../Drawables/Object.h"
 
 class Renderer
 {

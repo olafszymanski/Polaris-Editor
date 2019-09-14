@@ -12,7 +12,7 @@ Model::Model(const std::string& filePath)
 	if (ResourceManager::ModelExists(filePath)) *this = ResourceManager::GetModel(filePath);
 	else
 	{
-		const aiScene* scene = aiImportFile(filePath.c_str(), aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_GenUVCoords | aiProcess_GenNormals);
+		const aiScene* scene = aiImportFile(filePath.c_str(), aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_GenUVCoords | aiProcess_GenSmoothNormals);
 
 		POLARIS_WARNING(!scene, "Failed to load '" + filePath + "'!");
 
@@ -20,8 +20,8 @@ Model::Model(const std::string& filePath)
 
 		for (unsigned int i = 0; i < scene->mNumMeshes; ++i)
 		{
-			std::vector<Vertex> vertices{ };
-			std::vector<unsigned int> indices{ };
+			std::vector<Vertex> vertices { };
+			std::vector<unsigned int> indices { };
 
 			aiMesh* mesh = scene->mMeshes[i];
 

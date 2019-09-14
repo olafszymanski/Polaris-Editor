@@ -64,9 +64,12 @@ void Graphics::CreateSwapChain(const Window& window)
 	Microsoft::WRL::ComPtr<IDXGIFactory> dxgiFactory = nullptr;
 	POLARIS_DX_ASSERT(dxgiAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(dxgiFactory.GetAddressOf())), "Failed to create IDXGIFactory!");
 
+	RECT clientRect;
+	GetClientRect(window.GetHandle(), &clientRect);
+
 	DXGI_SWAP_CHAIN_DESC swapChainDesc { };
-	swapChainDesc.BufferDesc.Width = window.GetWidth();
-	swapChainDesc.BufferDesc.Height = window.GetHeight();
+	swapChainDesc.BufferDesc.Width = clientRect.right;
+	swapChainDesc.BufferDesc.Height = clientRect.bottom;
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -103,9 +106,12 @@ void Graphics::CreateDepthStencilView(const Window& window)
 {
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer = nullptr;
 
+	RECT clientRect;
+	GetClientRect(window.GetHandle(), &clientRect);
+
 	D3D11_TEXTURE2D_DESC depthStencilBufferDesc { };
-	depthStencilBufferDesc.Width = window.GetWidth();
-	depthStencilBufferDesc.Height = window.GetHeight();
+	depthStencilBufferDesc.Width = clientRect.right;
+	depthStencilBufferDesc.Height = clientRect.bottom;
 	depthStencilBufferDesc.MipLevels = 1;
 	depthStencilBufferDesc.ArraySize = 1;
 	depthStencilBufferDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;

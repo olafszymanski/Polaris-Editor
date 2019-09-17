@@ -20,7 +20,7 @@ class Editor
 {
 public:
 	Editor()
-		: m_Window(1280, 760, "Polaris Editor", false)
+		: m_Window(1280, 760, "Polaris Editor", true)
 		, m_DirectionalLight({ 0.0f, 0.0f, -1.0f }, { 1.0f, 1.0f, 1.0f })
 		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f })
 		, m_Camera(m_Window, { 0.0f, 10.0f, 5.0f })
@@ -72,7 +72,7 @@ private:
 		m_Renderer.ClearScreen();
 
 		m_Renderer.Draw(m_Camera);
-		m_WidgetRenderer.Draw();
+		m_WidgetRenderer.Draw(m_Window);
 
 		m_Renderer.Present();
 	}

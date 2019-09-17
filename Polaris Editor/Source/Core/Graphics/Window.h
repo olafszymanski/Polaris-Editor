@@ -37,7 +37,7 @@ private:
 
 	MSG m_Message;
 
-	bool m_Open;
+	bool m_Open, m_Dragged;
 
 private:
 	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);

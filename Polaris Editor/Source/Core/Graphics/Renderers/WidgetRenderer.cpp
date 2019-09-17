@@ -7,13 +7,17 @@
 #include "../Widgets/ImGui/imgui_impl_dx11.h"
 #include "../Widgets/ImGui/imgui_impl_win32.h"
 
-void WidgetRenderer::Draw()
+#include "../Window.h"
+
+void WidgetRenderer::Draw(const Window& window)
 {
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
 	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPosCenter(0);
+	ImGui::SetNextWindowSize(ImVec2(window.GetWidth(), window.GetHeight()));
 	ImGui::SetNextWindowViewport(viewport->ID);
 	ImGui::SetNextWindowBgAlpha(0.0f);
 
@@ -24,7 +28,9 @@ void WidgetRenderer::Draw()
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	ImGui::Begin("Polaris Editor", &open, windowFlags);
+
+	ImGui::Begin(window.GetTitle().c_str(), &open, windowFlags);
+
 	ImGui::PopStyleVar(3);
 
 	ImGuiID id = ImGui::GetID("Polaris Editor Dockspace");

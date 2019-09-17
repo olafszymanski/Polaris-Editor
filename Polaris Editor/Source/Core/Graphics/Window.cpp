@@ -15,7 +15,7 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 	, m_Resizable(resizable)
 	, m_Instance(GetModuleHandle(NULL)), m_Handle(NULL)
 	, m_Message({ })
-	, m_Open(false) 
+	, m_Open(false), m_Dragged(false)
 {
 	WNDCLASSEX windowClass { };
 	windowClass.cbSize = sizeof(WNDCLASSEX);
@@ -33,7 +33,21 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 
 	POLARIS_ASSERT(RegisterClassEx(&windowClass), "Failed to register WNDCLASSEX!");
 
-	POLARIS_ASSERT((m_Handle = CreateWindowEx(NULL, CLASS_NAME, m_Title.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, m_Width, m_Height, NULL, NULL, m_Instance, this)), "Failed to create window!");
+	DWORD styles = WS_OVERLAPPEDWINDOW;
+	if (!m_Resizable) styles = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+
+	POLARIS_ASSERT((m_Handle = CreateWindowEx(NULL, CLASS_NAME, m_Title.c_str(), styles, 0, 0, m_Width, m_Height, NULL, NULL, m_Instance, this)), "Failed to create window!");
+
+	RECT clientRect { };
+	GetClientRect(m_Handle, &clientRect);
+
+	RECT windowRect { };
+	GetWindowRect(m_Handle, &windowRect);
+
+	unsigned int realWidth = m_Width + windowRect.right - windowRect.left - clientRect.right;
+	unsigned int realHeight = m_Height + windowRect.bottom - windowRect.top - clientRect.bottom;
+
+	SetWindowPos(m_Handle, NULL, GetSystemMetrics(SM_CXSCREEN) / 2 - realWidth / 2, GetSystemMetrics(SM_CYSCREEN) / 2 - realHeight / 2, realWidth, realHeight, NULL);
 
 	ShowWindow(m_Handle, SW_SHOWDEFAULT);
 	UpdateWindow(m_Handle);
@@ -60,6 +74,10 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 }
 Window::~Window()
 {
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
+
 	POLARIS_ASSERT(UnregisterClass(CLASS_NAME, m_Instance), "Failed to unregister window class!");
 }
 
@@ -112,6 +130,43 @@ LRESULT Window::HandleEvents(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 		Mouse::HandleInput(Msg, wParam, lParam);
 		break;
 
+	case WM_NCLBUTTONDBLCLK:
+		Msg = 0;
+		break;
+	case WM_SIZE:
+		m_Width = LOWORD(lParam);
+		m_Height = HIWORD(lParam);
+		
+		switch (wParam)
+		{
+		case SIZE_MAXIMIZED:
+			Graphics::Resize(*this);
+			break;
+
+		case SIZE_RESTORED:
+			if (!m_Dragged)
+			{
+				static unsigned int i = 0;
+
+				if (i > 1) Graphics::Resize(*this);
+				else i += 1;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		break;
+	case WM_ENTERSIZEMOVE:
+		m_Dragged = true;
+		break;
+	case WM_EXITSIZEMOVE:
+		m_Dragged = false;
+
+		Graphics::Resize(*this);
+		break;
+		
 	case WM_KEYDOWN:
 	case WM_SYSKEYDOWN:
 	case WM_KEYUP:
@@ -139,7 +194,7 @@ LRESULT Window::HandleEvents(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 		m_Open = false;
 
-		POLARIS_ASSERT(DestroyWindow(m_Handle), "Failed to destroy window!");
+		POLARIS_ASSERT(DestroyWindow(m_Handle), "Failed to destroy a window!");
 		break;
 	}
 

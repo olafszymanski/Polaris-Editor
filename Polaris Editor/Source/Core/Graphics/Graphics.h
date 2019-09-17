@@ -22,7 +22,9 @@ protected:
 	Graphics() = default;
 	~Graphics() = default;
 
-	void Initialize(const Window& window);
+	static void Initialize(const Window& window);
+
+	static void Resize(const Window& window);
 
 private:
 	static bool s_Multisampling;

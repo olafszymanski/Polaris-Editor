@@ -7,6 +7,7 @@
 #include "Logger.h"
 
 bool Graphics::s_Multisampling = true;
+bool Graphics::s_VerticalSync = false;
 unsigned int Graphics::s_SampleCount = 8;
 unsigned int Graphics::s_MultisamplingQuality = 0;
 
@@ -19,6 +20,8 @@ Microsoft::WRL::ComPtr<ID3D11RenderTargetView> Graphics::s_RenderTargetView = nu
 Microsoft::WRL::ComPtr<ID3D11DepthStencilView> Graphics::s_DepthStencilView = nullptr;
 
 Microsoft::WRL::ComPtr<ID3D11RasterizerState> Graphics::s_RasterizerState = nullptr;
+
+DirectX::SimpleMath::Vector4 Graphics::s_ClearColor { 0.0f, 0.0f, 0.0f, 1.0f };
 
 void Graphics::Initialize(const Window& window)
 {

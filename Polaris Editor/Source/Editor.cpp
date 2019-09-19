@@ -15,6 +15,7 @@
 
 #include "Core/Graphics/Widgets/CameraWidget.h"
 #include "Core/Graphics/Widgets/InfoWidget.h"
+#include "Core/Graphics/Widgets/SettingsWidget.h"
 
 class Editor
 {
@@ -24,7 +25,7 @@ public:
 		, m_DirectionalLight({ 0.0f, 0.0f, -1.0f }, { 1.0f, 1.0f, 1.0f })
 		, m_Nanosuit({ "Resources/Models/Nanosuit/nanosuit.obj" }, { 0.0f, 0.0f, 0.0f }, { DirectX::XM_PI, 0.0f, 0.0f })
 		, m_Camera(m_Window, { 0.0f, 10.0f, 5.0f })
-		, m_CameraWidget(m_Camera), m_InfoWidget(m_Window)
+		, m_CameraWidget(m_Camera), m_InfoWidget(m_Window), m_SettingsWidget(m_Window)
 	{
 		m_Renderer.PushObject(m_Nanosuit);
 	}
@@ -57,6 +58,7 @@ private:
 
 	CameraWidget m_CameraWidget;
 	InfoWidget m_InfoWidget;
+	SettingsWidget m_SettingsWidget;
 
 private:
 	void Update(float deltaTime)

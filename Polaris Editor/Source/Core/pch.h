@@ -26,6 +26,8 @@
 #include <assimp/material.h>
 
 #include "Graphics/Widgets/ImGui/imgui.h"
+#include "Graphics/Widgets/ImGui/imgui_impl_dx11.h"
+#include "Graphics/Widgets/ImGui/imgui_impl_win32.h"
 
 #define __FILENAME__ (std::strrchr(__FILE__, '\\') ? std::strrchr(__FILE__, '\\') + 1 : __FILE__)
 

@@ -4,9 +4,6 @@
 
 #include "Logger.h"
 
-#include "Widgets/ImGui/imgui_impl_dx11.h"
-#include "Widgets/ImGui/imgui_impl_win32.h"
-
 const char* CLASS_NAME = "Polaris Editor";
 
 Window::Window(unsigned int width, unsigned int height, const std::string& title, bool resizable)

@@ -277,6 +277,7 @@
     <ClCompile Include="Source\Core\Graphics\Managers\LightManager.cpp" />
     <ClCompile Include="Source\Core\Graphics\Managers\ResourceManager.cpp" />
     <ClCompile Include="Source\Core\Graphics\Widgets\InfoWidget.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Widgets\SettingsWidget.cpp" />
     <ClCompile Include="Source\Core\Graphics\Widgets\Widget.cpp" />
     <ClCompile Include="Source\Core\Input\Keyboard.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
@@ -343,6 +344,7 @@
     <ClInclude Include="Source\Core\Graphics\Renderers\WidgetRenderer.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\CameraWidget.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\InfoWidget.h" />
+    <ClInclude Include="Source\Core\Graphics\Widgets\SettingsWidget.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\Widget.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imconfig.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imgui.h" />

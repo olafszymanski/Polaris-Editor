@@ -19,7 +19,10 @@ void Renderer::ClearScreen()
 {
 	Graphics::GetDeviceContext()->OMSetRenderTargets(1, Graphics::GetRenderTargetView().GetAddressOf(), Graphics::GetDepthStencilView().Get());
 
-	Graphics::GetDeviceContext()->ClearRenderTargetView(Graphics::GetRenderTargetView().Get(), DirectX::Colors::Black);
+	const DirectX::SimpleMath::Vector4& clearColor = Graphics::GetClearColor();
+	float realClearColor[4] = { clearColor.x, clearColor.y, clearColor.z, clearColor.w };
+
+	Graphics::GetDeviceContext()->ClearRenderTargetView(Graphics::GetRenderTargetView().Get(), realClearColor);
 	Graphics::GetDeviceContext()->ClearDepthStencilView(Graphics::GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 1);
 }
 
@@ -60,5 +63,5 @@ void Renderer::Draw(const Camera& camera)
 
 void Renderer::Present()
 {
-	Graphics::GetSwapChain()->Present(1, 0);
+	Graphics::GetSwapChain()->Present(Graphics::IsVerticalSync() ? 1 : 0, 0);
 }

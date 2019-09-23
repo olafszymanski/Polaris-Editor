@@ -13,6 +13,13 @@ public:
 
 	void Bind(unsigned int slot = 0) const;
 
+	// Getter
+	inline const std::string& GetFilePath() const { return m_FilePath; }
+
+	inline const Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& GetShaderTextureView() const { return m_ShaderTextureView; }
+
 private:
+	std::string m_FilePath;
+
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_ShaderTextureView;
 };

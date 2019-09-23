@@ -199,8 +199,9 @@
     <ClCompile Include="Source\Core\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Core\Graphics\Managers\WidgetManager.cpp" />
     <ClCompile Include="Source\Core\Graphics\Renderers\WidgetRenderer.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Scenes\Scene.cpp" />
     <ClCompile Include="Source\Core\Graphics\Widgets\CameraWidget.cpp" />
-    <ClCompile Include="Source\Core\Graphics\Widgets\ImGui\imgui.cpp">
+    <ClCompile Include="Source\Vendor\ImGui\imgui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeaderFile>
@@ -214,7 +215,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Widgets\ImGui\imgui_draw.cpp">
+    <ClCompile Include="Source\Vendor\ImGui\imgui_draw.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeaderFile>
@@ -228,7 +229,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Widgets\ImGui\imgui_impl_dx11.cpp">
+    <ClCompile Include="Source\Vendor\ImGui\imgui_impl_dx11.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeaderFile>
@@ -242,7 +243,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Widgets\ImGui\imgui_impl_win32.cpp">
+    <ClCompile Include="Source\Vendor\ImGui\imgui_impl_win32.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeaderFile>
@@ -256,7 +257,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Source\Core\Graphics\Widgets\ImGui\imgui_widgets.cpp">
+    <ClCompile Include="Source\Vendor\ImGui\imgui_widgets.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeaderFile>
@@ -277,6 +278,8 @@
     <ClCompile Include="Source\Core\Graphics\Managers\LightManager.cpp" />
     <ClCompile Include="Source\Core\Graphics\Managers\ResourceManager.cpp" />
     <ClCompile Include="Source\Core\Graphics\Widgets\InfoWidget.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Widgets\InspectorWidget.cpp" />
+    <ClCompile Include="Source\Core\Graphics\Widgets\HierarchyWidget.cpp" />
     <ClCompile Include="Source\Core\Graphics\Widgets\SettingsWidget.cpp" />
     <ClCompile Include="Source\Core\Graphics\Widgets\Widget.cpp" />
     <ClCompile Include="Source\Core\Input\Keyboard.cpp">
@@ -342,18 +345,21 @@
     <ClInclude Include="Source\Core\Graphics\Graphics.h" />
     <ClInclude Include="Source\Core\Graphics\Managers\WidgetManager.h" />
     <ClInclude Include="Source\Core\Graphics\Renderers\WidgetRenderer.h" />
+    <ClInclude Include="Source\Core\Graphics\Scenes\Scene.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\CameraWidget.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\InfoWidget.h" />
+    <ClInclude Include="Source\Core\Graphics\Widgets\InspectorWidget.h" />
+    <ClInclude Include="Source\Core\Graphics\Widgets\HierarchyWidget.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\SettingsWidget.h" />
     <ClInclude Include="Source\Core\Graphics\Widgets\Widget.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imconfig.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imgui.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imgui_impl_dx11.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imgui_impl_win32.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imgui_internal.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imstb_rectpack.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imstb_textedit.h" />
-    <ClInclude Include="Source\Core\Graphics\Widgets\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imconfig.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imgui.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imgui_internal.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imstb_textedit.h" />
+    <ClInclude Include="Source\Vendor\ImGui\imstb_truetype.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\DirectionalLight.h" />
     <ClInclude Include="Source\Core\Graphics\Lights\Light.h" />
     <ClInclude Include="Source\Core\Graphics\Managers\ResourceManager.h" />
@@ -365,7 +371,6 @@
     <ClInclude Include="Source\Core\Input\Mouse.h" />
     <ClInclude Include="Source\Core\Logger.h" />
     <ClInclude Include="Source\Core\Graphics\Renderers\Renderer.h" />
-    <ClInclude Include="Source\Core\Graphics\Renderers\Renderer.ipp" />
     <ClInclude Include="Source\Core\Graphics\Shaders\PhongShader.h" />
     <ClInclude Include="Source\Core\Graphics\Shaders\Shader.h" />
     <ClInclude Include="Source\Core\Graphics\Textures\Texture.h" />
@@ -374,6 +379,7 @@
     <ClInclude Include="Source\Core\pch.h" />
     <ClInclude Include="Source\Utils\NonCopyable.h" />
     <ClInclude Include="Source\Utils\StringHelper.h" />
+    <ClInclude Include="Source\Vendor\PortableFileDialogs\portable-file-dialogs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

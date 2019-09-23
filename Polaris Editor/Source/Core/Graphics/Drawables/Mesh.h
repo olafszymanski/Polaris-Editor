@@ -13,15 +13,15 @@ class Mesh
 {
 public:
 	template<unsigned int V_N, unsigned int I_N>
-	Mesh(const std::array<VertexStructure, V_N>& vertices, const std::array<unsigned short, I_N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture);
+	Mesh(const std::array<VertexStructure, V_N>& vertices, const std::array<unsigned short, I_N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture, const std::string& name);
 	template<unsigned int V_N, unsigned int I_N>
-	Mesh(const std::array<VertexStructure, V_N>& vertices, const std::array<unsigned int, I_N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture);
+	Mesh(const std::array<VertexStructure, V_N>& vertices, const std::array<unsigned int, I_N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture, const std::string& name);
 	template<unsigned int N>
-	Mesh(const std::vector<VertexStructure>& vertices, const std::array<unsigned short, N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture);
+	Mesh(const std::vector<VertexStructure>& vertices, const std::array<unsigned short, N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture, const std::string& name);
 	template<unsigned int N>
-	Mesh(const std::vector<VertexStructure>& vertices, const std::array<unsigned int, N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture);
-	Mesh(const std::vector<VertexStructure>& vertices, const std::vector<unsigned short>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture);
-	Mesh(const std::vector<VertexStructure>& vertices, const std::vector<unsigned int>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture);
+	Mesh(const std::vector<VertexStructure>& vertices, const std::array<unsigned int, N>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture, const std::string& name);
+	Mesh(const std::vector<VertexStructure>& vertices, const std::vector<unsigned short>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture, const std::string& name);
+	Mesh(const std::vector<VertexStructure>& vertices, const std::vector<unsigned int>& indices, const MaterialStructure& material, const Texture& diffuseTexture, const Texture& specularTexture, const std::string& name);
 	~Mesh() = default;
 
 	Mesh(const Mesh& other);
@@ -32,6 +32,8 @@ public:
 	void Update();
 
 	// Getters
+	inline const std::string& GetName() const { return m_Name; }
+
 	inline const unsigned int& GetIndexCount() const { return m_IndexCount; }
 
 	inline const MaterialStructure& GetMaterial() const { return m_Material; }
@@ -65,6 +67,8 @@ private:
 
 	Texture m_DiffuseTexture, m_SpecularTexture;
 	bool m_UpdateDiffuseTexture, m_UpdateSpecularTexture;
+
+	std::string m_Name;
 };
 
 #include "Mesh.ipp"

@@ -2,7 +2,7 @@
 
 #include "SettingsWidget.h"
 
-#include "ImGui/imgui_internal.h"
+#include "../../../Vendor/ImGui/imgui_internal.h"
 
 SettingsWidget::SettingsWidget(const Window& window)
 	: m_Window(window)

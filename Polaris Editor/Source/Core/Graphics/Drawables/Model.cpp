@@ -7,7 +7,8 @@
 #include "../../../Utils/StringHelper.h"
 
 Model::Model(const std::string& filePath)
-	: m_Meshes({ }) 
+	: m_Meshes({ })
+	, m_Name(StringHelper::GetFileName(filePath))
 {
 	if (ResourceManager::ModelExists(filePath)) *this = ResourceManager::GetModel(filePath);
 	else
@@ -64,7 +65,7 @@ Model::Model(const std::string& filePath)
 			Texture diffuse = GetMaterialTexture(scene, material, aiTextureType_DIFFUSE, directory);
 			Texture specular = GetMaterialTexture(scene, material, aiTextureType_SPECULAR, directory);
 
-			m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, GetMaterial(material), diffuse, specular));
+			m_Meshes.push_back(std::make_shared<Mesh>(vertices, indices, GetMaterial(material), diffuse, specular, std::string(mesh->mName.C_Str())));
 		}
 
 		aiReleaseImport(scene);
@@ -75,11 +76,17 @@ Model::Model(const std::string& filePath)
 
 Model::Model(const Model& other)
 	: m_Meshes(other.m_Meshes)
+	, m_Name(other.m_Name)
 {
 }
 Model& Model::operator=(const Model& other)
 {
-	if (this != &other) m_Meshes = other.m_Meshes;
+	if (this != &other)
+	{
+		m_Meshes = other.m_Meshes;
+
+		m_Name = other.m_Name;
+	}
 
 	return *this;
 }

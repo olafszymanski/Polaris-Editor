@@ -4,9 +4,6 @@
 
 #include "../Managers/WidgetManager.h"
 
-#include "../Widgets/ImGui/imgui_impl_dx11.h"
-#include "../Widgets/ImGui/imgui_impl_win32.h"
-
 #include "../Window.h"
 
 void WidgetRenderer::Draw(const Window& window)

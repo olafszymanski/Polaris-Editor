@@ -14,7 +14,8 @@
 #include "../../Logger.h"
 
 Texture::Texture(const std::string& filePath)
-	: m_ShaderTextureView(nullptr)
+	: m_FilePath(filePath)
+	, m_ShaderTextureView(nullptr)
 {
 	if (ResourceManager::TextureExists(filePath)) *this = ResourceManager::GetTexture(filePath);
 	else
@@ -28,7 +29,8 @@ Texture::Texture(const std::string& filePath)
 	}
 }
 Texture::Texture(unsigned int width, unsigned int height, const DirectX::SimpleMath::Vector4& color)
-	: m_ShaderTextureView(nullptr)
+	: m_FilePath("")
+	, m_ShaderTextureView(nullptr)
 {
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> texture = nullptr;
 
@@ -55,7 +57,8 @@ Texture::Texture(unsigned int width, unsigned int height, const DirectX::SimpleM
 	POLARIS_DX_ASSERT(Graphics::GetDevice()->CreateShaderResourceView(texture.Get(), nullptr, m_ShaderTextureView.GetAddressOf()), "Failed to create ID3D11ShaderResourceView!");
 }
 Texture::Texture(unsigned int size, const uint8_t* data)
-	: m_ShaderTextureView(nullptr)
+	: m_FilePath("")
+	, m_ShaderTextureView(nullptr)
 {
 	Microsoft::WRL::ComPtr<ID3D11Resource> texture = nullptr;
 
@@ -63,12 +66,18 @@ Texture::Texture(unsigned int size, const uint8_t* data)
 }
 
 Texture::Texture(const Texture& other)
-	: m_ShaderTextureView(other.m_ShaderTextureView)
+	: m_FilePath(other.m_FilePath)
+	, m_ShaderTextureView(other.m_ShaderTextureView)
 {
 }
 Texture& Texture::operator=(const Texture& other)
 {
-	if (this != &other) m_ShaderTextureView = other.m_ShaderTextureView;
+	if (this != &other)
+	{
+		m_FilePath = other.m_FilePath;
+		
+		m_ShaderTextureView = other.m_ShaderTextureView;
+	}
 
 	return *this;
 }

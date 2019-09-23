@@ -1,10 +1,8 @@
 #pragma once
 
-class Camera;
+class Scene;
 
 #include "../Shaders/PhongShader.h"
-
-#include "../Drawables/Object.h"
 
 class Renderer
 {
@@ -14,19 +12,10 @@ public:
 
 	void ClearScreen();
 
-	void PushObject(Object& object);
-	template<unsigned int N>
-	void PushObjects(const std::array<Object*, N>& objects);
-	void PushObjects(const std::vector<Object*>& objects);
-
-	void Draw(const Camera& camera);
+	void Draw(Scene& scene);
 
 	void Present();
 
 private:
 	PhongShader m_PhongShader;
-
-	std::vector<Object*> m_Objects;
 };
-
-#include "Renderer.ipp"

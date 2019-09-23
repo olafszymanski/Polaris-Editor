@@ -14,22 +14,21 @@ void CameraWidget::DrawImGui()
 	ImGui::Text("Position");
 
 	DirectX::SimpleMath::Vector3 position = m_Camera.GetPosition();
+	float* positionPointers[3] { &position.x, &position.y, &position.z };
 
-	ImGui::SliderFloat("X", &position.x, -100.0f, 100.0f, "%.01f");
-	ImGui::SliderFloat("Y", &position.y, -100.0f, 100.0f, "%.01f");
-	ImGui::SliderFloat("Z", &position.z, -100.0f, 100.0f, "%.01f");
+	ImGui::DragFloat3("XYZ", *positionPointers, 1.0f, -100.0f, 100.0f, "%.01f");
 
-	if (ImGui::Button("Reset")) m_Camera.SetPosition({ 0.0f, 0.0f, 0.0f });
+	if (ImGui::Button("Reset##0")) m_Camera.SetPosition({ 0.0f, 0.0f, 0.0f });
 	else m_Camera.SetPosition(position);
 
 	ImGui::Text("Rotation");
 
 	DirectX::SimpleMath::Vector2 rotation = m_Camera.GetRotation();
 
-	ImGui::SliderFloat("Yaw", &rotation.x, -360.0f, 360.0f, "%.01f");
-	ImGui::SliderFloat("Pitch", &rotation.y, -80.0f, 80.0f, "%.01f");
+	ImGui::DragFloat("Yaw", &rotation.x, 1.0f, -180.0f, 180.0f, "%.01f");
+	ImGui::DragFloat("Pitch", &rotation.y, 1.0f, -90.0f, 90.0f, "%.01f");
 
-	if (ImGui::Button("Reset")) m_Camera.SetRotation({ 0.0f, 0.0f });
+	if (ImGui::Button("Reset##1")) m_Camera.SetRotation({ 0.0f, 0.0f });
 	else m_Camera.SetRotation(rotation);
 
 	ImGui::End();

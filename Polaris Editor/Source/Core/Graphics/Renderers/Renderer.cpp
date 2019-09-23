@@ -4,13 +4,12 @@
 
 #include "../Graphics.h"
 
-#include "../Cameras/Camera.h"
+#include "../Scenes/Scene.h"
 
-#include <DirectXColors.h>
+#include "../Drawables/Object.h"
 
 Renderer::Renderer()
 	: m_PhongShader()
-	, m_Objects({ })
 {
 	m_PhongShader.Bind();
 }
@@ -20,43 +19,34 @@ void Renderer::ClearScreen()
 	Graphics::GetDeviceContext()->OMSetRenderTargets(1, Graphics::GetRenderTargetView().GetAddressOf(), Graphics::GetDepthStencilView().Get());
 
 	const DirectX::SimpleMath::Vector4& clearColor = Graphics::GetClearColor();
-	float realClearColor[4] = { clearColor.x, clearColor.y, clearColor.z, clearColor.w };
+	float realClearColor[4] { clearColor.x, clearColor.y, clearColor.z, clearColor.w };
 
 	Graphics::GetDeviceContext()->ClearRenderTargetView(Graphics::GetRenderTargetView().Get(), realClearColor);
 	Graphics::GetDeviceContext()->ClearDepthStencilView(Graphics::GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 1);
 }
 
-void Renderer::PushObject(Object& object)
+void Renderer::Draw(Scene& scene)
 {
-	m_Objects.push_back(&object);
-}
-void Renderer::PushObjects(const std::vector<Object*>& objects)
-{
-	for (auto& object : objects)
+	m_PhongShader.UpdateLighting({ scene.GetCamera().GetPosition() });
+
+	for (auto& object : scene.GetObjects())
 	{
-		m_Objects.push_back(object);
-	}
-}
-
-void Renderer::Draw(const Camera& camera)
-{
-	m_PhongShader.UpdateLighting({ camera.GetPosition() });
-
-	for (auto& object : m_Objects)
-	{
-		object->Update();
-
-		m_PhongShader.UpdateMatrices({ object->GetMatrix().Transpose(), object->GetMatrix().Invert().Transpose(), (object->GetMatrix() * camera.GetMatrix()).Transpose() });
-
-		for (auto& mesh : object->GetModel().GetMeshes())
+		if (object.second != nullptr)
 		{
-			mesh->Bind();
+			object.second->Update();
 
-			m_PhongShader.UpdateMaterial(mesh->GetMaterial());
+			m_PhongShader.UpdateMatrices({ object.second->GetMatrix().Transpose(), object.second->GetMatrix().Invert().Transpose(), (object.second->GetMatrix() * scene.GetCamera().GetMatrix()).Transpose() });
 
-			mesh->Update();
+			for (auto& mesh : object.second->GetModel().GetMeshes())
+			{
+				mesh->Bind();
 
-			Graphics::GetDeviceContext()->DrawIndexed(mesh->GetIndexCount(), 0, 0);
+				m_PhongShader.UpdateMaterial(mesh->GetMaterial());
+
+				mesh->Update();
+
+				Graphics::GetDeviceContext()->DrawIndexed(mesh->GetIndexCount(), 0, 0);
+			}
 		}
 	}
 }
